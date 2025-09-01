@@ -4,21 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>{% block title %}{% endblock %} | GESTION DES RANDEZ VOUS </title>
-    <link rel="shortcut icon" href="{{base_url()}}assets/img/favicon.png">
+    <title>BSMS | {% block title %}{% endblock %} </title>
+    <link rel="shortcut icon" href="{{base_url()}}assets/img/logo-bsms/favicon.png">
 
     <!-- Fontfamily -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
-
+   
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{base_url()}}assets/plugins/bootstrap/css/bootstrap.min.css">
 
     <!-- Feathericon CSS -->
     <link rel="stylesheet" href="{{base_url()}}assets/plugins/feather/feather.css">
-
     <!-- Pe7 CSS -->
     <link rel="stylesheet" href="{{base_url()}}assets/plugins/icons/flags/flags.css">
-
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="{{base_url()}}assets/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="{{base_url()}}assets/plugins/fontawesome/css/all.min.css">
@@ -29,8 +26,10 @@
     <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/animate.min.css">
     <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/datatable.min.css">
     <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/theme.css">
-
-
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
     {% block link %}{% endblock %}
     <script>
         var baseUrl = '{{base_url()}}';
@@ -38,81 +37,39 @@
 </head>
 
 <body>
-
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-
         <!-- Header -->
         <div class="header">
 
             <!-- Logo -->
             <div class="header-left">
-                <a href="index.html" class="logo">
-                    <img src="{{base_url()}}assets/img/logo.png" alt="Logo">
+                <a href="{{'dashboard' | url }}" class="logo">
+                    <img src="{{base_url()}}assets/img/logo-bsms/logo.png" alt="Logo">
                 </a>
-                <a href="index.html" class="logo logo-small">
-                    <img src="{{base_url()}}assets/img/logo-small.png" alt="Logo" width="30" height="30">
+                <a href="{{'dashboard' | url }}" class="logo logo-small">
+                    <img src="{{base_url()}}assets/img/logo-bsms/favicon.png" alt="Logo" width="30" height="30">
                 </a>
             </div>
             <!-- /Logo -->
 
-            <div class="menu-toggle">
-                <a href="javascript:void(0);" id="toggle_btn">
+            <div class="menu-toggle ">
+                <a href="javascript:void(0);" id="toggle_btn" class="bg-warning text-dark">
                     <i class="fas fa-bars"></i>
                 </a>
             </div>
 
             <!-- Search Bar -->
-            <div class="top-nav-search">
-                <form>
-                    <input type="text" class="form-control" placeholder="Search here">
-                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-            <!-- /Search Bar -->
 
+            <!-- /Search Bar -->
             <!-- Mobile Menu Toggle -->
             <a class="mobile_btn" id="mobile_btn">
                 <i class="fas fa-bars"></i>
             </a>
             <!-- /Mobile Menu Toggle -->
-
             <!-- Header Right Menu -->
             <ul class="nav user-menu">
-
                 <!-- Notifications -->
-                <li class="nav-item dropdown noti-dropdown me-2">
-                    <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
-                        <img src="{{base_url()}}assets/img/icons/header-icon-05.svg" alt="">
-                    </a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span class="notification-title">Notifications</span>
-                        </div>
-                        <div class="noti-content">
-                            <ul class="notification-list">
-                                {% for notification in _SESSION['notification'] %}
-                                <li class="notification-message">
-                                    <a href="#">
-                                        <div class="media d-flex">
-                                            <span class="avatar avatar-sm flex-shrink-0">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="./public/assets/img/bell.png">
-                                            </span>
-                                            <div class="media-body flex-grow-1">
-                                                <p class="noti-details">{{notification['desc_notification']}}</p>
-                                                <p class="noti-time"><span class="notification-time">{{notification['created_at'] | date('d-m-Y h:m') }}</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        <div class="topnav-dropdown-footer">
-                            <a href="#">Voir+</a>
-                        </div>
-                    </div>
-                </li>
                 <!-- /Notifications -->
                 <li class="nav-item zoom-screen me-2">
                     <a href="#" class="nav-link header-nav-list win-maximize">
@@ -153,49 +110,55 @@
             <!-- /Header Right Menu -->
 
         </div>
-        <!-- /Header -->
-
-        <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li class="menu-title">
-                            <span>Main Menu</span>
+                            <span class="fw-bolder text-black">Main Menu</span>
                         </li>
                         <li class="active">
                             <a href="{{'dashboard' | url }}"><i class="feather-grid"></i><span>Dashboard</span></a>
                         </li>
-                        <li class="submenu">
-								<a href="#"><i class="fas fa-graduation-cap"></i> <span> Utilisateur</span> <span class="menu-arrow"></span></a>
-								<ul>
-									<li><a href="{{'user/list-user' | url }}">Liste des utilisateur</a></li>
-									
-								</ul>
-							</li>
-							<li class="submenu">
-								<a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Rendez Vous </span> <span class="menu-arrow"></span></a>
-								<ul>
-									<li><a href="{{'dashboard' | url }}">Rendezvous</a></li>
-								
-								</ul>
-							</li>
-                            <li class="submenu">
-								<a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Notification </span> <span class="menu-arrow"></span></a>
-								<ul>
-									<li><a href="{{'notification/list' | url }}">Les Notifications</a></li>
-								
-								</ul>
-							</li>
-                            <li class="submenu">
-								<a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Reporting </span> <span class="menu-arrow"></span></a>
-								<ul>
-									<li><a href="{{'rdv/reporting' | url }}">reporting</a></li>
-								
-								</ul>
-							</li>
-                        
+                        <li>
+                            <a href="{{'clients' | url }}"><i class="fas fa-user-plus"></i> <span>Clients</span></a>
+                        </li>
+                       
+                        <li>
+                            <a href="{{'articles' | url }}"><i class="fas fa-shopping-basket""></i> <span>Articles </span></a>
 
+                        </li>
+                         <li>
+                            <a href=" {{'personnelle' | url }}"><i class="fas fa-chalkboard-teacher"></i> <span>Employé </span></a>
+
+                        </li>
+                         <li>
+                            <a href="{{'livraisons' | url }}"><i class="fas fa-truck"></i> <span>Livraisons </span></a>
+
+                        </li>
+                        <li class=" menu-title">
+                            <span class="fw-bolder text-black">Facturation(s)</span>
+                        </li>
+
+
+                        <li>
+                            <a href="{{'commandes' | url }}"><i class="fas fa-credit-card"></i> <span>Commandes </span></a>
+
+                        </li>
+                        <li>
+                            <a href="{{'factures' | url }}"><i class="fas fa-sticky-note"></i> <span>Factures </span></a>
+
+                        </li>
+                       
+                        <li>
+                            <a href="{{'paiements' | url }}"><i class="fas fa-university"></i> <span>Paiements </span></a>
+
+                        </li>
+                     
+                        <li>
+                            <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Reporting </span></a>
+
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -208,40 +171,82 @@
             <!-- Footer -->
             <footer>
                 <p class="text-capitalize lnr-text-align-justify">
-                    Copyright © 2023 GUI-SCHOOL . <br>
+                    Copyright © 2025 KANTARA MOUSSA . <br>
                     <span>Téléphone : +224 623 90 25 28</span> <br>
-                    <span>Email: info@gui-school.com</span>
+                    <span>Email: moussaizaziszamalkantara@gmail.com</span>
                 </p>
             </footer>
             <!-- /Footer -->
 
         </div>
         <!-- /Page Wrapper -->
-
-
-
     </div>
+    <!--Modal-->
+    <div class="modal fade" tabindex="-1" id="xmModal" role="dialog" aria-labelledby="xmModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"> </div>
+        </div>
+    </div>
+    <!--end Modal-->
     <!-- /Main Wrapper -->
     <!-- JS templete -->
     {% block script %}{% endblock %}
-    <script src="{{base_url()}}assets/js/jquery-3.6.0.min.js"></script>
+     <script src="{{base_url()}}assets/js/jquery-3.6.0.min.js"></script>
     <script src="{{base_url()}}assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="{{base_url()}}assets/js/feather.min.js"></script>
-    <script src="{{base_url()}}assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="{{base_url()}}assets/plugins/apexchart/apexcharts.min.js"></script>
-    <script src="{{base_url()}}assets/plugins/apexchart/chart-data.js"></script>
     <script src="{{base_url()}}assets/js/script.js"></script>
-
     <!-- JS other -->
+    <!-- JavaScript -->
     <script src="{{base_url()}}js/scripts/__jlive.js"></script>
-
-    <script src="{{base_url()}}js/datatables.js"></script>
-    <script src="{{base_url()}}js/libs/jquery.form.js"></script>
+    <script src="{{base_url()}}js/bundle.js"></script>
+    <script src="{{base_url()}}js/scripts.js"></script>
+    <script src="{{base_url()}}js/libs/io.min.js"></script>
     <script src="{{base_url()}}js/scripts/jaupl.js"></script>
     <script src="{{base_url()}}js/libs/print.min.js"></script>
 
-
     <script type="module" src="{{base_url()}}js/scripts/script.js"></script>
+
+
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#dataTable').DataTable({
+        dom: 'Bfrtip', // bouton au-dessus du tableau
+        buttons: [
+            {
+                extend: 'csvHtml5',
+                text: 'Exporter CSV',
+                className: 'btn btn-success m-1'
+            },
+            {
+                extend: 'excelHtml5',
+                text: 'Exporter Excel',
+                className: 'btn btn-success m-1'
+            },
+            {
+                extend: 'pdfHtml5',
+                text: 'Exporter PDF',
+                className: 'btn btn-danger m-1'
+            },
+            {
+                extend: 'print',
+                text: 'Imprimer',
+                className: 'btn btn-primary m-1'
+            }
+        ],
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/fr-FR.json'
+        }
+    });
+});
+</script>
 
 </body>
 

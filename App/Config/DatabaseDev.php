@@ -34,7 +34,7 @@ class DatabaseDev
      * @var string
      */
      //  const DB_NAME = 'sms';
-     const DB_NAME = 'hakaton';
+     const DB_NAME = 'Facturation';
 
     /**
      * Database user

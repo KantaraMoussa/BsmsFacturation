@@ -863,7 +863,7 @@
       $j(idModal).attr('aria-hidden', "true");
       $j(idModal + ' .modal-dialog').removeAttr('style')
         .removeClass('modal-default')
-        .removeClass('modal-full')
+        .removeClass('modal-fullscreen')
         .removeClass('modal-lg')
         .removeClass('modal-sm')
         .removeClass('modal-xl')

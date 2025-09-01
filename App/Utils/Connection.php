@@ -8,25 +8,24 @@ use Core\Helpers;
 
 class Connection
 {
-    private $email;
+    private $login;
     private $password;
     private $utilisateurService;
-   
     public $usersReq;
 
 
-    public function __construct($email, $password)
+    public function __construct($login, $password)
     {
 
         $this->utilisateurService = new ServicesUtilisateur();
-        $this->email = $email;
+        $this->login = $login;
         $this->password = sha1($password);
-        $this->usersReq = new \App\Models\Utlisateurs();
+        $this->usersReq = new \App\Models\Users();
     }
     public function is_member()
     {
 
-        if ($this->usersReq->count2('email', $this->email, 'mot_de_pass', $this->password) == 1) {
+        if ($this->usersReq->count2('login_users', $this->login, 'pwd_users', $this->password) == 1) {
             return true;
         } else {
             return false;
@@ -34,7 +33,7 @@ class Connection
     }
     public function is_connected()
     {
-        if (empty($_SESSION['id_user']) || empty($_SESSION['email'])) {
+        if (empty($_SESSION['id_users']) || empty($_SESSION['email_users'])) {
             return false;
         } else {
             return true;
@@ -42,7 +41,7 @@ class Connection
     }
     private function getUserInfo()
     {
-      return $this->utilisateurService->getUtilisateur('email',$this->email, 0, 1);
+        return $this->utilisateurService->getUtilisateur('login_users', $this->login, 0, 1);
     }
 
     public function disconnect()
@@ -57,11 +56,14 @@ class Connection
     {
 
         $user = $this->getUserInfo();
-        $_SESSION['id_user'] = $user['id_user'];
-        $_SESSION['nom'] = $user['nom'] ;
-        $_SESSION['email'] = $user['email'] ;
-        $_SESSION['telephone'] = $user['telephone'] ;
-        $_SESSION['role_utilisateur'] = $user['role_utilisateur'] ;
+        $_SESSION['id_user'] = $user['id_users'];
+        $_SESSION['nom'] = $user['fname_users'] . ' ' . $user['lname_users'];
+        $_SESSION['email'] = $user['email_users'];
+        $_SESSION['telephone'] = $user['phone_users'];
+        $_SESSION['login'] = $user['login_users'];
+        $_SESSION['pwd'] = $user['pwd_users'];
+
+        $_SESSION['role_utilisateur'] = $user['type_users'];
     }
     public function test()
     {
@@ -69,10 +71,10 @@ class Connection
             return false;
         } else {
             $this->createSession();
-            $token=utilHelpers::randomToken();
+            /*  $token=utilHelpers::randomToken();
             $this->utilisateurService->updateToken($token);
             $smsText ="votre code de confirmation "; $smsText.=$token;
-            utilHelpers::sendSms('224'.trim($_SESSION['telephone']),$smsText);
+            utilHelpers::sendSms('224'.trim($_SESSION['telephone']),$smsText);*/
             return true;
         }
     }

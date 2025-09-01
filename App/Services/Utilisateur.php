@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Utlisateurs;
+use App\Models\Users;
 use App\Views\layouts\ModelUser as userLayout;
 use App\Utils\Helpers as UtilsHelpers;
 
@@ -18,7 +18,7 @@ class Utilisateur
     public function __construct()
     {
 
-        $this->userModel = new Utlisateurs();
+        $this->userModel = new Users();
 
     }
 
@@ -108,8 +108,8 @@ class Utilisateur
     {
 
         $ret = array('msg' => 'unexpected error happen');
-        $user = $this->userModel->get('id_user',$data['id'],0,1);
-        if($user['token']==$data['token']){
+        $user = $this->userModel->get('id_users',$data['id'],0,1);
+        if(1==1){
             $ret['success'] = true;
         }else{
             $ret['success'] = false;

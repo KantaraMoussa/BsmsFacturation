@@ -108,15 +108,15 @@ class SQLQuery
         //var_dump($this->_prepareSQL);
         //var_dump($this->_data);
 
-        $this->_type = 'UPDATE';
+         $this->_type = 'UPDATE';
         $data_ = [];
         $num_args = count($data);
         $field = "";
         $i = 0;
         foreach ($data as $argID => $arg) {
 
-            $field .= $argID.'  = :data_' .$argID;
-            $data_['data_' .$argID] = $arg;
+            $field .= $argID . '  = :data_' . $argID;
+            $data_['data_' . $argID] = $arg;
             $i++;
             $field .= $i < $num_args ? ', ' : '';
         }
@@ -124,8 +124,8 @@ class SQLQuery
         $this->_prepareSQL = "UPDATE $this->_table SET $field";
         $this->_data = $data_;
 
-        //var_dump($this->_prepareSQL);
-        //var_dump($this->_data);
+       // var_dump($this->_prepareSQL);
+       // var_dump($this->_data);
     }
 
     private function _where($args, $num_args, $start = 0)
@@ -195,8 +195,8 @@ class SQLQuery
         }
         //make sure to not override update data witch is an array
 
-        if ($this->_subQuery) {
-            $this->_prepareSQL .= 'WHERE ' . $this->sub_query . ' ' . $whereRet[0]+"\n";
+        if ($this->sub_query) {
+            $this->_prepareSQL .= ' WHERE ' . $this->sub_query . ' ' . $whereRet[0]."\n";
         }
 
         /* else
@@ -564,11 +564,11 @@ class SQLQuery
      * @example whereSubQuery('field', 'IN', 'table')
      * @example whereSubQuery('field', 'IN', 'table', 'AND', [[where]])
      */
-    public function whereSubQuery($field, $type_subquery, $table, $table_field, $conditionSep = "AND", $condition = null)
+    public function whereSubQuery($field, $type_subquery, $table, $table_field, $condition = "AND")
     {
         $this->_type = 'SUBSELECT';
         $this->subQuery($field, $type_subquery, $table, $table_field, $condition);
-        $this->_prepareSQL .= $condition ? ' '.$conditionSep.' ' : ' WHERE ' . $this->_subQuery;
+        $this->_prepareSQL .= 'WHERE ' . $this->sub_query;
     }
 
     /**
@@ -579,11 +579,11 @@ class SQLQuery
     public function subQuery($field, $type_subquery, $table, $table_field, $condition = null)
     {
         $this->_type = 'SUBSELECT';
-        $whereRet = $condition ? $this->where($condition) : null;
-        if ($this->_subQuery) {
-            $this->_subQuery .= $field . ' ' . $type_subquery . ' ( SELECT ' . $table_field . ' FROM ' . $table . ($condition && $whereRet ? ' WHERE' . $whereRet[0] : '') . " )\n";
+        $whereRet = $condition ? $this->_where($condition, count($condition)) : null;
+        if ($this->sub_query) {
+            $this->sub_query .= $field . ' ' . $type_subquery . ' ( SELECT ' . $table_field . ' FROM ' . $table . ($condition && $whereRet ? ' WHERE' . $whereRet[0] : '') . " )\n";
         } else {
-            $this->_subQuery = $field . ' ' . $type_subquery . ' ( SELECT ' . $table_field . ' FROM ' . $table . ($condition && $whereRet ? ' WHERE' . $whereRet[0] : '') . " )\n";
+            $this->sub_query = $field . ' ' . $type_subquery . ' ( SELECT ' . $table_field . ' FROM ' . $table . ($condition && $whereRet ? ' WHERE' . $whereRet[0] : '') . " )\n";
         }
 
         if ($condition && $whereRet) {
@@ -656,7 +656,7 @@ class SQLQuery
      */
     public function endSubQuery($logical)
     {
-        $this->sub_query .= $logical . '\n';
+        $this->sub_query .= $logical . "\n";
     }
 
     public function exec()

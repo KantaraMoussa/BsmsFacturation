@@ -7,369 +7,6 @@ use Core\Helpers as CoreHelpers;
 
 class layout
 {
-
-
-
-
-    public static function dashboard()
-    {
-
-        $ret = '
-        <!-- Page Header -->
-        <div class="page-header">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h3 class="page-title">Bienvenue sur votre tableaux de board</h3>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="../dashboard">Accueil</a></li>
-                        <li class="breadcrumb-item active">Tableau de board</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- /Page Header -->
-        
-        <!-- Invoice Header -->
-        <div class="page-header">
-            <div class="row align-items-center">
-                <div class="col"></div>
-                <div class="col-auto">
-                    <a href="invoices.html" class="invoices-links active">
-                        <i class="feather feather-list"></i>
-                    </a>
-                    <a href="invoice-grid.html" class="invoices-links">
-                        <i class="feather feather-grid"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- /Invoice Header -->
-   
-        <!-- Report Filter -->
-        <div class="card report-card">
-            <div class="card-body pb-0">
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="app-listing">
-                            <li>
-                                <div class="multipleSelection">
-                                    <div class="selectBox">
-                                        <p class="mb-0"><i class="fas fa-user-plus me-1 select-icon"></i> Select User</p>
-                                        <span class="down-icon"><i class="fas fa-chevron-down"></i></span>
-                                    </div>							  
-                                    <div id="checkBoxes">
-                                        <form action="#">
-                                            <p class="checkbox-title">Customer Search</p>
-                                            <div class="form-custom">
-                                                <input type="text" class="form-control bg-grey" placeholder="Enter Customer Name">
-                                            </div>
-                                            <div class="selectBox-cont">
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="username">
-                                                    <span class="checkmark"></span>  Brian Johnson
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="username">
-                                                    <span class="checkmark"></span>  Russell Copeland
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="username">
-                                                    <span class="checkmark"></span>  Greg Lynch
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="username">
-                                                    <span class="checkmark"></span> John Blair
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="username">
-                                                    <span class="checkmark"></span> Barbara Moore
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="username">
-                                                    <span class="checkmark"></span> Hendry Evan
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="username">
-                                                    <span class="checkmark"></span> Richard Miles
-                                                </label>
-                                            </div>
-                                            <button type="submit" class="btn w-100 btn-primary">Apply</button>
-                                            <button type="reset" class="btn w-100 btn-grey">Reset</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="multipleSelection">
-                                    <div class="selectBox">
-                                        <p class="mb-0"><i class="fas fa-calendar me-1 select-icon"></i> Select Date</p>
-                                        <span class="down-icon"><i class="fas fa-chevron-down"></i></span>
-                                    </div>							  
-                                    <div id="checkBoxes">
-                                        <form action="#">
-                                            <p class="checkbox-title">Date Filter</p>
-                                            <div class="selectBox-cont selectBox-cont-one h-auto">
-                                                <div class="date-picker">
-                                                    <div class="form-custom cal-icon">
-                                                        <input class="form-control datetimepicker" type="text" placeholder="Form">
-                                                    </div>
-                                                </div>
-                                                <div class="date-picker pe-0">
-                                                    <div class="form-custom cal-icon">
-                                                        <input class="form-control datetimepicker" type="text" placeholder="To">
-                                                    </div>
-                                                </div>
-                                                <div class="date-list">
-                                                    <ul>
-                                                        <li><a href="#" class="btn date-btn">Today</a></li>
-                                                        <li><a href="#" class="btn date-btn">Yesterday</a></li>
-                                                        <li><a href="#" class="btn date-btn">Last 7 days</a></li>
-                                                        <li><a href="#" class="btn date-btn">This month</a></li>
-                                                        <li><a href="#" class="btn date-btn">Last month</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="multipleSelection">
-                                    <div class="selectBox">
-                                        <p class="mb-0"><i class="fas fa-book-open me-1 select-icon"></i> Select Status</p>
-                                        <span class="down-icon"><i class="fas fa-chevron-down"></i></span>
-                                    </div>					  
-                                    <div id="checkBoxes">
-                                        <form action="#">
-                                            <p class="checkbox-title">By Status</p>
-                                            <div class="selectBox-cont">
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="name" checked>
-                                                    <span class="checkmark"></span> All Invoices
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="name">
-                                                    <span class="checkmark"></span> Paid
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="name">
-                                                    <span class="checkmark"></span> Overdue
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="name">
-                                                    <span class="checkmark"></span> Draft
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="name">
-                                                    <span class="checkmark"></span> Recurring
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="name">
-                                                    <span class="checkmark"></span> Cancelled
-                                                </label>
-                                            </div>
-                                            <button type="submit" class="btn w-100 btn-primary">Apply</button>
-                                            <button type="reset" class="btn w-100 btn-grey">Reset</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="multipleSelection">
-                                    <div class="selectBox">
-                                        <p class="mb-0"><i class="fas fa-bookmark me-1 select-icon"></i> By Category</p>
-                                        <span class="down-icon"><i class="fas fa-chevron-down"></i></span>
-                                    </div>						  
-                                    <div id="checkBoxes">
-                                        <form action="#">
-                                            <p class="checkbox-title">Category</p>
-                                            <div class="form-custom">
-                                                <input type="text" class="form-control bg-grey" placeholder="Enter Category Name">
-                                            </div>
-                                            <div class="selectBox-cont">
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="category">
-                                                    <span class="checkmark"></span> Advertising
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="category">
-                                                    <span class="checkmark"></span> Food
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="category">
-                                                    <span class="checkmark"></span> Marketing
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="category">
-                                                    <span class="checkmark"></span> Repairs
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="category">
-                                                    <span class="checkmark"></span> Software
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="category">
-                                                    <span class="checkmark"></span> Stationary
-                                                </label>
-                                                <label class="custom_check w-100">
-                                                    <input type="checkbox" name="category">
-                                                    <span class="checkmark"></span> Travel
-                                                </label>
-                                            </div>
-                                            <button type="submit" class="btn w-100 btn-primary">Apply</button>
-                                            <button type="reset" class="btn w-100 btn-grey">Reset</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="report-btn">
-                                    <a href="#" class="btn">
-                                        <img src="assets/img/icons/invoices-icon5.png" alt="" class="me-2"> Generate report
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Report Filter -->
-        ';
-
-
-        return $ret;
-    }
-
-    public static function navigation()
-    {
-        $ret = '
-        <div class="card invoices-tabs-card border-0">
-            <div class="card-body card-body pt-0 pb-0">
-                <div class="invoices-main-tabs">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8 col-md-8">
-                            <div class="invoices-tabs">
-                                <ul>
-                                    <li><a href="'.CoreHelpers::url('dashboard').'" class="active">Rendez vous en attente</a></li>
-                                    <li><a href="'.CoreHelpers::url('user/list-user').'">Les utilisateurs</a></li>	
-                                    <li><a href="'.CoreHelpers::url('notification/list').'">Tous mes notification</a></li>		
-                                  
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="invoices-settings-btn">
-                                <a href="'.CoreHelpers::url('rdv/add').'" class="btn">
-                                    <i class="feather feather-plus-circle"></i> New Rdv 
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-     ';
-
-        return $ret;
-    }
-    public static function payInvoice($totalrecu, $totalEmis, $totalConfirmer, $totalAnnuler, $pr, $pe, $pa, $pc)
-    {
-        $ret = '
-        <div class="row">
-        <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card inovices-card">
-                <div class="card-body">
-                    <div class="inovices-widget-header">
-                        <span class="inovices-widget-icon">
-                            <img src="assets/img/icons/invoices-icon1.svg" alt="">
-                        </span>
-                        <div class="inovices-dash-count">
-                            <div class="inovices-amount">' . $totalrecu . '</div>
-                        </div>
-                    </div>
-                    <p class="inovices-all">Total rendezvous Réçus <span class="badge badge-danger">' . $pr . '%</span></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card inovices-card">
-                <div class="card-body">
-                    <div class="inovices-widget-header">
-                        <span class="inovices-widget-icon">
-                            <img src="assets/img/icons/invoices-icon2.svg" alt="">
-                        </span>
-                        <div class="inovices-dash-count">
-                            <div class="inovices-amount">' . $totalEmis . '</div>
-                        </div>
-                    </div>
-                    <p class="inovices-all">Rendez vous total émit <span class="badge badge-danger">' . $pe . '%</span></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card inovices-card">
-                <div class="card-body">
-                    <div class="inovices-widget-header">
-                        <span class="inovices-widget-icon">
-                            <img src="assets/img/icons/invoices-icon3.svg" alt="">
-                        </span>
-                        <div class="inovices-dash-count">
-                            <div class="inovices-amount">' . $totalConfirmer . '</div>
-                        </div>
-                    </div>
-                    <p class="inovices-all">Total randez vous confirmé <span class="badge badge-danger">' . $pc . '%</span> </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card inovices-card">
-                <div class="card-body">
-                    <div class="inovices-widget-header">
-                        <span class="inovices-widget-icon">
-                            <img src="assets/img/icons/invoices-icon4.svg" alt="">
-                        </span>
-                        <div class="inovices-dash-count">
-                            <div class="inovices-amount">' . $totalAnnuler . '</div>
-                        </div>
-                    </div>
-                    <p class="inovices-all">Total annulé <span class="badge badge-danger">' . $pa . '%</span></p>
-                </div>
-            </div>
-        </div>
-     </div>
-        ';
-
-        return $ret;
-    }
-    public static function notificationBlock(array $models)
-    {
-        $ret = '';
-        foreach ($models as $model) {
-        $ret .= '
-            <div class="card">
-            <div class="card-body">
-                <div class="student-box flex-fill">
-                    <div class="student-img">
-                        <a href="student-details.html">
-                            <img class="img-fluid" alt="notification" src="./public/assets/img/bell.png">
-                        </a>
-                    </div>
-                    <div class="student-content pb-0">												
-                        <h5><span class="text-danger">'. $model['notification_type'].'</span></h5>
-                        <h6>'. $model['desc_notification'].'</h6>
-                    </div>
-                </div>
-            </div>
-        </div>';
-        }
-
-        return $ret;
-        
-        return $ret;
-    }
-
-   
     public static function select(array $model)
     {
         $ret = '';
@@ -378,110 +15,557 @@ class layout
         }
         return $ret;
     }
-    public static function listUserOption(array $models)
+    public static function LayoutListArticles(array $models)
     {
         $ret = '';
         foreach ($models as $model) {
-            $ret .= '<option value="' . $model['id_user'] . '">' . $model['nom'] . ' - ' . $model['email'] . ' / ' . $model['telephone'] . '</option>';
-        }
-        return $ret;
-    }
-
-    public static function listRdvTd(array $models)
-    {
-        $ret = '';
-        foreach ($models as $model) {
-            isset($model['lieux_rdv']) ? $lieux = $model['lieux_rdv'] : $lieux = "Non définie";
-
             $ret .= '
-                  <tr>
-                    <td>
-                        <h2 class="table-avatar">
-                            <a href="' . CoreHelpers::url('rdv/detail/' . $model["id_rdv"]) . '">
-                               
-                               ' . $model['nom'] . '
-                            </a>
-                        </h2>
-
-                    <td>' . $model['date_debut_rdv'] . ' à ' . $model['heure_debut_rdv'] . '</td>
-                    <td>' . $model['date_fin_rdv'] . ' à ' . $model['heure_fin_rdv'] . '</td>
-                    <td>' . $lieux . '</td>
-                    <td><span class="badge bg-danger">' . $model['status_rdv'] . '</span></td>
-                    
-                    </tr>
-            
-            
+                <tr>
+                 <td><span>' . $model['libelle_articles'] . ' </span></td>
+                 <td><span>' . $model['marque_articles'] . ' </span></td>
+                 <td><span>' . $model['type_articles'] . ' </span></td>
+                 <td><span>' . $model['quantite_articles'] . ' </span></td>
+                 <td><span>' . $model['cathegorie_articles'] . ' </span></td>
+                  <td class="text-end">
+                                     
+                                        <div class="actions ">
+                                           <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('articles/article-action/detail/' . $model['article_id'] . '/' . $model['type_articles'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addArticle(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                            <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('articles/article-action/update/' . $model['article_id'] . '/' . $model['type_articles'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addArticle(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                </tr>
             ';
         }
 
         return $ret;
     }
-    public static function listUser(array $models)
+    public static function LayoutListAddresses(array $models)
     {
         $ret = '';
         foreach ($models as $model) {
             $ret .= '
-                  <tr>
-                    <td>
-                        <h2 class="table-avatar">
-                            <a href="' . CoreHelpers::url('user/profile/' . $model["id_user"]) . '">
-                                <img class="avatar avatar-sm me-2 avatar-img rounded-circle" src="../public/assets/img/avatar.png" alt="User Image">
-                               ' . $model['nom'] . '
-                            </a>
-                        </h2>
-                    <td>' . $model['email'] . '</td>
-                    <td>' . $model['telephone'] . '</td>
-                    <td><span class="badge bg-danger">' . $model['role_utilisateur'] . '</span></td>
-                    </tr>
-            
+                <tr>
+                  <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
+
+                 <td><a href="mailto:' . $model['email_clients'] . '">' . $model['email_clients'] . ' </a></td>
+                 <td><span>' . $model['telephone_clients'] . ' </span></td>
+                 <td><span>' . $model['type_addresses'] . ' </span></td>
+                 <td><span>' . $model['rue_addresses'] . ' </span></td>
+                 <td><span>' . $model['ville_addresses'] . ' </span></td>
+                 <td><span>' . $model['code_postal_addresses'] . ' </span></td>
+                 <td><span>' . $model['pays_addresses'] . ' </span></td>
+                                    <td class="text-end">
+                                        <div class="actions ">
+                                           <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('addresses/addresse-action/detail/' . $model['adresse_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addAddresse(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                            <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('addresses/addresse-action/update/' . $model['adresse_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addAddresse(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                </tr>
             ';
         }
 
         return $ret;
     }
-    public static function notification(array $models)
+    public static function LayoutListClients(array $models)
     {
         $ret = '';
         foreach ($models as $model) {
-
-
             $ret .= '
-            <li class="notification-message">
-                <a href="#">
-                    <div class="media d-flex">
-                        <span class="avatar avatar-sm flex-shrink-0">
-                            <img class="avatar-img rounded-circle" alt="User Image" src="./public/assets/img/bell.png">
-                        </span>
-                        <div class="media-body flex-grow-1">
-                            <p class="noti-details">' . $model['desc_notification'] . '</p>
-                            <p class="noti-time"><span class="notification-time">' . date('d-m-Y h:m', $model['created_at']) . '</span></p>
+                <tr>
+                 <td><span>' . $model['noms_clients'] . ' </span></td>
+                 <td><span>' . $model['email_clients'] . ' </span></td>
+                 <td><span>' . $model['telephone_clients'] . ' </span></td>
+                <td class="text-end">
+                                        <div class="actions ">
+                                           <a href="' . CoreHelpers::url('Clients/detail/' . $model['client_id']) . '"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                            
+                                        </div>
+                                    </td>
+                
+                </tr>
+            ';
+        }
+
+        return $ret;
+    }
+    public static function LayoutListCommandes(array $models)
+    {
+        $ret = '';
+        foreach ($models as $model) {
+            if ($model['etat_commandes'] == "en attente") {
+                $textColor = "text-danger";
+            } else if ($model['etat_commandes'] == "retardée") {
+                $textColor = "text-warning";
+            } else {
+                $textColor = "text-success";
+            }
+            $ret .= '
+                <tr>
+                 <td><span class="fw-bolder">' . $model['reference_commandes'] . ' </span></td>
+                 <td><span>' . ($model['date_commandes']) . ' </span></td>
+                   <td><span>' . Helpers::formatMoney($model['mttc']) . '  </span></td>
+                     <td><span>' . Helpers::formatMoney($model['mpc']) . '  </span></td>
+                       <td><span>' . Helpers::formatMoney($model['reste']) . '  </span></td>
+                         <td><span>' . $model['taux'] . '  </span></td>
+                        <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
+                 <td><span class="fw-bolder ' . $textColor . '">' . $model['etat_commandes'] . ' </span></td>
+               
+                  <td class="text-end">
+                     <div class="actions ">
+                        <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                               
+                                             <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/commande-action/update/' . $model['commande_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addCommande(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                            
+                                        </div>
+                                    </td>
+                
+                </tr>
+              </tr>
+            ';
+        }
+
+        return $ret;
+    }
+    public static function LayoutListCommandesHistoriques(array $models)
+    {
+        $ret = '';
+        foreach ($models as $model) {
+            $ret .= '
+                <tr>
+                 <td><span>' . $model['commande_id'] . ' </span></td>
+                 <td><span>' . $model['libelle_articles'] . ' </span></td>
+                 <td><span>' . $model['noms_clients'] . ' </span></td>
+                 <td><span>' . $model['statut_factures'] . ' </span></td>
+                 <td><span>' . $model['quantite_facture_lignes'] . ' </span></td>
+                 <td><span>' . Helpers::formatMoney($model['prix_unitaire_facture_lignes']) . ' </span></td>
+                 <td><span>' . $model['taux_tva_facture_lignes'] . ' </span></td>
+                 <td><span>' . $model['reference_facture_lignes'] . ' </span></td>
+                 <td><span>' . Helpers::formatMoney($model['montant_ttc_facture_lignes']) . ' </span></td>
+                 <td><span>' . $model['description_facture_lignes'] . ' </span></td>
+              </tr>
+            ';
+        }
+
+        return $ret;
+    }
+    public static function LayoutListFactures(array $models)
+    {
+        $ret = '';
+        foreach ($models as $model) {
+            if ($model['valide_factures'] == 'false') {
+                $txtColor = "text-danger";
+                $txt = "Facture en attante de validation";
+            } else {
+                $txtColor = "text-success";
+                $txt = "Facture validée";
+            }
+            $taux = number_format(floatval($model['taux']), 2);
+            $ret .= '
+                <tr>
+                   <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . $model['reference_commandes'] . ' </a></td>
+                      <td><span>' . $model['reference_factures'] . ' </span></td>
+            
+                          <td><span>' . Helpers::formatMoney($model['mttc']) . ' </span></td>
+                          <td><span>' .  Helpers::formatMoney($model['mpc']) . ' </span></td>
+                          <td><span>' .  Helpers::formatMoney($model['reste']) . ' </span></td>
+                            <td><span>' . $taux . ' % </span></td>
+                      <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
+                
+                  <td><span class="fw-bolder ' . $txtColor . '">' . $txt . ' </span></td>
+                 <td class="text-end">
+                                        <div class="actions ">
+                                            <a href="' . CoreHelpers::url('factures/detail/' . $model['facture_id']) . '"
+                                                class="btn btn-sm bg-success-light me-2 ">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                         <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('factures/facture-action/update/' . $model['facture_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                           <i class="feather-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+              </tr>
+            ';
+        }
+
+        return $ret;
+    }
+
+
+    public static function LayoutListLigneFactures(array $models)
+    {
+        $ret = '';
+        foreach ($models as $model) {
+            if ($model['statut_factures'] == 'non payée') {
+                $txtColor = "text-danger";
+            } else  if ($model['statut_factures'] == 'partiellement payée') {
+                $txtColor = "text-warning";
+            } else {
+                $txtColor = "text-success";
+            }
+            $ret .= '
+                <tr>
+
+                    <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
+                 <td><span>' . $model['libelle_articles'] . ' </span></td>
+                  <td><span>' . $model['type_articles'] . ' </span></td>
+                   <td><span class="fw-bolder ' . $txtColor . '">' . $model['statut_factures'] . ' </span></td>
+                      <td><span>' . $model['quantite_facture_lignes'] . ' </span></td>
+                    <td><span>' . Helpers::formatMoney($model['prix_unitaire_facture_lignes']) . ' </span></td>
+                    <td><span>' . $model['taux_tva_facture_lignes'] . ' </span></td>
+                   <td><span>' . Helpers::formatMoney($model['montant_ttc_facture_lignes']) . ' </span></td>
+                   <td><span>' . $model['reference_facture_lignes'] . ' </span></td>
+                 <td class="text-end">
+                                        <div class="actions ">
+                                            <a href="' . CoreHelpers::url('factureLignes/detail/' . $model['ligne_id']) . '"
+                                                class="btn btn-sm bg-success-light me-2 ">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>    
+              </tr>
+            ';
+        }
+
+
+
+
+
+        return $ret;
+    }
+    public static function LayoutListLivraisons(array $models)
+    {
+        $ret = '';
+        foreach ($models as $model) {
+            $ret .= '
+                <tr>
+                  <td>  <a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . $model['reference_commandes'] . ' </a></td>
+                  <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
+                 <td><span>' . $model['libelle_articles'] . ' </span></td>
+               
+                 <td><span>' . $model['date_commandes'] . ' </span></td>
+                 <td><span>' . $model['noms_personnelles'] . ' </span></td>
+                <td><span>' . $model['telephone_personnelles'] . ' </span></td>
+                 <td><span>' . $model['email_personnelles'] . ' </span></td>
+                 <td><span>' . $model['etat_livraisons'] . ' </span></td>
+                 <td class="text-end">
+                                   
+                                        <div class="actions ">
+                                           <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('livraisons/livraison-action/detail/' . $model['livraison_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addLivraison(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                            <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('livraisons/livraison-action/update/' . $model['livraison_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addLivraison(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+              </tr>
+            ';
+        }
+
+        return $ret;
+    }
+    public static function LayoutListTransporteur(array $models)
+    {
+        $ret = '';
+        foreach ($models as $model) {
+            $ret .= '
+                <tr>
+                 <td><span>' . $model['noms_personnelles'] . ' </span></td>
+                 <td><span>' . $model['email_personnelles'] . ' </span></td>
+                 <td><span>' . $model['telephone_personnelles'] . ' </span></td>
+                 <td><span>' . $model['poste_personnelles'] . ' </span></td>
+           
+                                        <td class="text-end">
+                                        <div class="actions ">
+                                           <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('personnelle/transporteur-action/detail/' . $model['personnelle_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addTransporteur(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                            <a  onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('personnelle/transporteur-action/update/' . $model['personnelle_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addTransporteur(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                                <i class="feather-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                
+           
+            </tr>
+            ';
+        }
+
+        return $ret;
+    }
+    public static function LayoutListPaiement(array $models)
+    {
+        $ret = '';
+        foreach ($models as $model) {
+            $ret .= '
+                <tr>
+                 <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . $model['reference_commandes'] . ' </a></td>
+                      <td><span>' . $model['reference_factures'] . ' </span></td>
+              
+           
+                                         <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
+                 <td><span>' . $model['date_paiements'] . ' </span></td>
+                 <td><span>' . Helpers::formatMoney($model['montant_paiements']) . ' </span></td>
+                 <td><span>' . $model['mode_paiements'] . ' </span></td>  
+                 
+              </tr>
+            ';
+        }
+
+        return $ret;
+    }
+
+    public static function LayoutListFactureParCommande(array $models)
+    {
+        $ret = '';
+        foreach ($models as $model) {
+            $ret .= '
+                <tr>
+                 <td><span>' . $model['reference_factures'] . ' </span></td>
+                 <td><span>' . $model['libelle_factures'] . ' </span></td>
+                 <td><span>' . $model['statut_factures'] . ' </span></td>
+                 <td class="text-end">
+                      <a href="' . CoreHelpers::url('factures/detail/' . $model['facture_id']) . '"
+                        class="btn btn-sm bg-success-light me-2 ">
+                        <i class="feather-eye"></i>
+                          </a>                         
+                 </div>
+              </tr>
+            ';
+        }
+
+        return $ret;
+    }
+
+    public static function navStyle()
+    {
+        $data = Helpers::layoutState();
+        $ret = '<div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Total Comandes</h6>
+                                        <h3>' .  $data['commande'] . '</h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="assets/img/icons/teacher-icon-01.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </a>
-            </li>
-        ';
-        }
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Total Factures</h6>
+                                        <h3>' .  $data['facture'] . '</h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="assets/img/icons/teacher-icon-02.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Facture en attente de paiement</h6>
+                                        <h3>' .  $data['facture_impayer'] . '</h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="assets/img/icons/student-icon-01.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Total Facture / Facture payée</h6>
+                                        <h3><span class="text-danger">' . $data['facture'] . '</span> / <span class="text-success">' . $data['facture_payer'] . '</span> </h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="assets/img/icons/student-icon-02.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="card invoices-tabs-card border-0">
+        <div class="card-body card-body pt-0 pb-0">
+            <div class="invoices-main-tabs">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 col-md-8">
+                        <div class="invoices-tabs">
+                            <ul>
+                                <li><a href="' . CoreHelpers::url('commandes') . '" class="active">Commandes</a></li>
+                                <li><a href="' . CoreHelpers::url('factures') . '" >Factures</a></li>
+                                <li><a href="' . CoreHelpers::url('clients') . ' ">Clients</a></li>
+                                <li><a href="' . CoreHelpers::url('articles') . ' ">Articles</a></li>
+                                <li><a href="' . CoreHelpers::url('livraisons') . ' ">Livraisons</a></li>
+                                <li><a href="' . CoreHelpers::url('paiements') . '">Paiements</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="invoices-settings-btn">
+                         <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/commande-action/add/null') . '\',afterLoad:function(myModal){UGEST.facturation.addCommande(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn">
+                                                <i class="feather feather-plus-circle"></i> New Commande
+                                            </a>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                ';
 
         return $ret;
     }
-  
-    public static function listNotification(array $models)
+
+    public static function navStyleClient($data)
+    {
+
+        $ret = '<div class="row">
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Total Comandes</h6>
+                                        <h3>' .  $data['commande'] . '</h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="../../assets/img/icons/teacher-icon-01.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Total Factures</h6>
+                                        <h3>' .  $data['facture'] . '</h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="../../assets/img/icons/teacher-icon-02.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Facture en attente de paiement</h6>
+                                        <h3>' .  $data['facture_impayer'] . '</h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="../../assets/img/icons/student-icon-01.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                        <div class="card bg-comman w-100">
+                            <div class="card-body">
+                                <div class="db-widgets d-flex justify-content-between align-items-center">
+                                    <div class="db-info">
+                                        <h6>Total Facture / Facture payée</h6>
+                                        <h3><span class="text-danger">' . $data['facture'] . '</span> / <span class="text-success">' . $data['facture_payer'] . '</span> </h3>
+                                    </div>
+                                    <div class="db-icon">
+                                        <img src="../../assets/img/icons/student-icon-02.svg" alt="Dashboard Icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+
+        return $ret;
+    }
+
+    public static function LayoutListFacturesFromClient(array $models)
     {
         $ret = '';
         foreach ($models as $model) {
+            if ($model['valide_factures'] == 'false') {
+                $txtColor = "text-danger";
+                $txt = "Facture en attante de validation";
+            } else {
+                $txtColor = "text-success";
+                $txt = "Facture validée";
+            }
+            $taux = number_format(floatval($model['taux']), 2);
             $ret .= '
-                  <tr>
-                    <td>
-                        <h2 class="table-avatar">
-                            <a href="#">
-                             ' . $model['type_notification'] . '
-                            </a>
-                        </h2>
-                    <td>' . $model['desc_notification'] . '</td>
-                    <td>' .date('d-m-Y h:m', $model['created_at']) . '</td>
-                    
-                    </tr>
+                <tr>
+                   <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . $model['reference_commandes'] . ' </a></td>
+                      <td><span>' . $model['reference_factures'] . ' </span></td>
             
+                          <td><span>' . Helpers::formatMoney($model['mttc']) . ' </span></td>
+                          <td><span>' .  Helpers::formatMoney($model['mpc']) . ' </span></td>
+                          <td><span>' .  Helpers::formatMoney($model['reste']) . ' </span></td>
+                            <td><span>' . $taux . ' % </span></td>
+                    
+                
+                  <td><span class="fw-bolder ' . $txtColor . '">' . $txt . ' </span></td>
+                 <td class="text-end">
+                                        <div class="actions ">
+                                            <a href="' . CoreHelpers::url('factures/detail/' . $model['facture_id']) . '"
+                                                class="btn btn-sm bg-success-light me-2 ">
+                                                <i class="feather-eye"></i>
+                                            </a>
+                                         <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('factures/facture-action/update/' . $model['facture_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                           <i class="feather-edit"></i>
+                                            </a>
+                                             </a>
+                                            <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('paiements/paiement-action/add/' . $model['facture_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addPaiement(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                           <i class="feather-credit-card"></i>
+                                            </a>
+
+                                             <a  class="btn btn-sm bg-success-light me-2">
+                                           <i class="fa fa-print"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+              </tr>
             ';
         }
 

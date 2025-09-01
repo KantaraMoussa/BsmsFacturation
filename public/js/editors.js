@@ -108,6 +108,35 @@
 
   }
 
+  NioApp._Quills = function (elems) {
+
+    var toolbarOptions = [['bold', 'italic', 'underline'], // toggled buttons
+    ['blockquote', {
+      'list': 'bullet'
+    }], [{
+      'header': 1
+    }, {
+      'header': 2
+    }, {
+      'header': [3, 4, 5, 6, false]
+    }], [{
+      'align': []
+    }], ['clean'] // remove formatting button
+    ];
+    let quills=[];
+
+    elems.forEach(elem => {
+      quills['elem']= new Quill(elem, {
+        modules: {
+          toolbar: toolbarOptions
+        },
+        theme: 'snow'
+      });
+    });
+   return  quills;
+
+  }
+
   NioApp.Quill = function () {
     var _basic = '.quill-basic';
 

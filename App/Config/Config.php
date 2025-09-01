@@ -13,13 +13,13 @@ class Config
      * Project Folder
      * @var string
      */
-    const ROOT_FOLDER = 'Hackaton_app/';
+    const ROOT_FOLDER = 'facturation_bsms/';
 
     /**
      * 404 URL
      * @var string
      */
-    const URL_404 = "http://localhost/Hackaton_app/error/404";
+    const URL_404 = "http://localhost/facturation_bsms/error/404";
 
     /**
      * Set development environment

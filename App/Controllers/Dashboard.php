@@ -1,8 +1,14 @@
 <?php
 
 namespace App\Controllers;
-use App\Services\Dashboards;
+
+use App\Models\FactureLignes;
+use App\Models\Commandes;
+use App\Models\Factures;
+use App\Models\Articles;
 use App\Services\Utils;
+use App\Services\AppServices;
+use App\Utils\Helpers;
 use \Core\View;
 
 /**
@@ -12,49 +18,38 @@ class Dashboard extends \Core\FrontController
 
 {
 
-    private $dashboardService;
+    private $factureLignemodel;
+    private $commandeModel;
+    private $factureModel;
+    private $articleModel;
     private $utilsService;
 
+    private $appService;
+
     public function __construct()
-    {   session_start();
-        $this->dashboardService = new Dashboards();
+    {
+        session_start();
+        $this->factureLignemodel = new FactureLignes();
+        $this->commandeModel = new Commandes();
+        $this->factureModel = new Factures();
         $this->utilsService = new Utils();
+        $this->articleModel = new Articles();
+        $this->appService = new AppServices();
     }
     /**
      * Show the index page
      *
      * @return void
      */
-    public function indexAction()
+    public function indexAction() 
     {
-         $rdv=$this->dashboardService->rdvEnAttente('id_user_recept_rdv',$_SESSION['id_user'],'status_rdv','En attente');
-         $emit=$this->dashboardService->countRdv1('id_user_ask_rdv',$_SESSION['id_user']);
-         $recu=$this->dashboardService->countRdv1('id_user_recept_rdv',$_SESSION['id_user']);
-         $confirmer=$this->dashboardService->countRdv2('id_user_ask_rdv',$_SESSION['id_user'],'status_rdv','Confirmé');
-         $annuler=$this->dashboardService->countRdv2('id_user_ask_rdv',$_SESSION['id_user'],'status_rdv','annulé');
-         $totalRdv=($this->dashboardService->countRdv1('id_user_recept_rdv',$_SESSION['id_user'])+$this->dashboardService->countRdv1('id_user_ask_rdv',$_SESSION['id_user']));
-        $_SESSION['notification']=$this->dashboardService->forNotification('id_user_recept_notification',$_SESSION['id_user'],0,5);
-         ($totalRdv==0) ? $div=1 : $div=$totalRdv;
-        $pe=(($emit*100)/$div);
-         $pr=(($recu*100)/$div);
-         $pc=(($confirmer*100)/$div);
-         $pa=(($annuler*100)/$div);
-         //------------------ notification    
-         View::renderTemplate('dashboard/index.php',
-                            array('listRdvEnAttente'=>$rdv,
-                                  'recu'=>$recu,'emit'=>$emit,'confirmer'=>$confirmer,'annuler'=>$annuler,
-                                  'pe'=>$pe,'pr'=>$pr,'pc'=>$pc,'pa'=>$pa,
-                                ));
+        //------------------ notification    
+        View::renderTemplate('dashboard/index.php', array('factures' => $this->appService->getFactureListe() ));
     }
-
     public function before()
     {
-       $this->utilsService->onBeforeGlobal();
+        $this->utilsService->onBeforeGlobal();
     }
 
-    protected function after()
-    {
-
-    }
-
+    protected function after() {}
 }

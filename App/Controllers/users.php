@@ -7,8 +7,6 @@ use App\Utils\Helpers;
 use App\Utils\Connection;
 use Core\Helpers as CoreHelpers;
 use \Core\View;
-use App\Services\Rdv as ServicesRdv;
-use App\Services\Dashboards;
 use App\Services\Utilisateur;
 
 class Users extends \Core\FrontController
@@ -21,7 +19,7 @@ class Users extends \Core\FrontController
     {
         session_start();
         $this->userService = new Utilisateur();
-        $this->dashboardService = new Dashboards();
+
        
     }
 
@@ -38,7 +36,7 @@ class Users extends \Core\FrontController
     public function ProfileAction($param)
     {
        View::renderTemplate('user/profile.php', array(
-       'user'=>$this->userService->getUser('id_user',$param['id'],0,1),
+       'user'=>$this->userService->getUser('id_users',$param['id'],0,1),
        'rdv'=>$this->dashboardService->rdvEnAttente('id_user_recept_rdv',$param['id'],
        'status_rdv','En attente')));
     }
@@ -50,13 +48,13 @@ class Users extends \Core\FrontController
     public function editProfilAction($param)
     {
       
-        View::renderTemplate('user/edit-profil.php', array('user'=>$this->userService->getUser('id_user',$param['id'],0,1),
+        View::renderTemplate('user/edit-profil.php', array('user'=>$this->userService->getUser('id_users',$param['id'],0,1),
        'select'=>Helpers::roleUser()));
     }
     public function addAvatarAction($param)
     {
       
-        View::renderTemplate('user/add-avatar.php', array('user'=>$this->userService->getUser('id_user',$param['id'],0,1),
+        View::renderTemplate('user/add-avatar.php', array('user'=>$this->userService->getUser('id_users',$param['id'],0,1),
      ));
     }
   

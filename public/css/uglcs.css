@@ -5458,6 +5458,8 @@ div.dataTables_wrapper div.dataTables_filter .form-floating > input:not(:placeho
 .modal-title {
   margin-bottom: 0;
   line-height: 1.65;
+  background-color: #000000 !important;
+  color: #FFF !important;
 }
 
 .modal-body {

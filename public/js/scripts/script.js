@@ -1,34 +1,235 @@
 import Main from "./main.js";
 import Webcam from "./webcam.js";
+import sdi from "./univprint.js";
 
 window.UGEST = {
-  user: {
+  _sdi: null,
+  facturation: {
     init: () => {
-      UGEST.user.addUser();
-      UGEST.user.updateUser();
-      UGEST.user.ChangePassword();
-      UGEST.user.validToken();
-      UGEST.user.login();
+      UGEST.facturation.addAddresse();
+      UGEST.facturation.addArticle();
+      UGEST.facturation.addClient();
+      UGEST.facturation.addCommande();
+      UGEST.facturation.addFacture();
+      UGEST.facturation.addFactureLigne();
+      UGEST.facturation.addLivraison();
+      UGEST.facturation.addPaiement();
+      UGEST.facturation.addTransporteur();
+      UGEST.facturation.login();
+      UGEST.facturation.printFees();
     },
-    addUser: () => {
-      let subBtn = $("#add-user-btn");
-      if ($j("#add-user").count() != 0) {
-        subBtn.click(() => {
-          $("#add-user").submit();
-        });
-        Main.formControl("#add-user", async (form) => {
-          Main.confirm({ text: "" }, async () => {       
-            form.data.action = "add_user";
-           // subBtn.addClass("ks-is-loading");
-           let res = JSON.parse(
+
+    addAddresse: (modal) => {
+      if ($j("#action-addresse").count() != 0) {
+        Main.formControl("#action-addresse", async (form) => {
+          Main.confirm({ text: "" }, async () => {
+            form.data.action = "add_addresse";
+            form.data.type = $j(form.obj).data("type");
+            form.data.type != "add"
+              ? (form.data.id = $j(form.obj).data("id"))
+              : (form.data.id = null);
+            $j(form.submitBtn).addClass("ks-is-loading");
+            let res = JSON.parse(
               await Main.post($j(form.obj).attr("action"), form.data)
             );
             if (res.success) {
-                      Main.notify("Votre compte a été créer avec success");
+              Main.notify("Traitement effectué avec succées");
+              modal.hide();
             } else {
               Main.notify(res.msg, "error");
             }
-            subBtn.removeClass("ks-is-loading");
+            $j(form.submitBtn).removeClass("ks-is-loading");
+          });
+        });
+      }
+    },
+    addArticle: (modal) => {
+      if ($j("#action-article").count() != 0) {
+        Main.formControl("#action-article", async (form) => {
+          Main.confirm({ text: "" }, async () => {
+            form.data.action = "add_article";
+            form.data.type = $j(form.obj).data("type");
+            form.data.type != "add"
+              ? (form.data.id = $j(form.obj).data("id"))
+              : (form.data.id = null);
+            $j(form.submitBtn).addClass("ks-is-loading");
+            let res = JSON.parse(
+              await Main.post($j(form.obj).attr("action"), form.data)
+            );
+            if (res.success) {
+              Main.notify("Traitement effectué avec succées");
+              modal.hide();
+            } else {
+              Main.notify(res.msg, "error");
+            }
+            $j(form.submitBtn).removeClass("ks-is-loading");
+          });
+        });
+      }
+    },
+    addClient: (modal) => {
+      if ($j("#action-client").count() != 0) {
+        Main.formControl("#action-client", async (form) => {
+          Main.confirm({ text: "" }, async () => {
+            form.data.action = "add_client";
+            form.data.type = $j(form.obj).data("type");
+            form.data.type != "add"
+              ? (form.data.id = $j(form.obj).data("id"))
+              : (form.data.id = null);
+            $j(form.submitBtn).addClass("ks-is-loading");
+            let res = JSON.parse(
+              await Main.post($j(form.obj).attr("action"), form.data)
+            );
+            if (res.success) {
+              Main.notify("Traitement effectué avec succées");
+              modal.hide();
+            } else {
+              Main.notify(res.msg, "error");
+            }
+            $j(form.submitBtn).removeClass("ks-is-loading");
+          });
+        });
+      }
+    },
+    addCommande: (modal) => {
+      if ($j("#action-commande").count() != 0) {
+        Main.formControl("#action-commande", async (form) => {
+          Main.confirm({ text: "" }, async () => {
+            form.data.action = "add_commande";
+            form.data.type = $j(form.obj).data("type");
+            form.data.type != "add"
+              ? (form.data.id = $j(form.obj).data("id"))
+              : (form.data.id = null);
+            $j(form.submitBtn).addClass("ks-is-loading");
+            let res = JSON.parse(
+              await Main.post($j(form.obj).attr("action"), form.data)
+            );
+            if (res.success) {
+              Main.notify("Traitement effectué avec succées");
+              modal.hide();
+            } else {
+              Main.notify(res.msg, "error");
+            }
+            $j(form.submitBtn).removeClass("ks-is-loading");
+          });
+        });
+      }
+    },
+    addFactureLigne: (modal) => {
+      if ($j("#action-facture-ligne").count() != 0) {
+        Main.formControl("#action-facture-ligne", async (form) => {
+          Main.confirm({ text: "" }, async () => {
+            form.data.action = "add_facture_ligne";
+            form.data.type = $j(form.obj).data("type");
+            form.data.id = $j(form.obj).data("id");
+            // $j(form.submitBtn).addClass("ks-is-loading");
+            let res = JSON.parse(
+              await Main.post($j(form.obj).attr("action"), form.data)
+            );
+            if (res.success) {
+              Main.notify("Traitement effectué avec succées");
+              modal.hide();
+            } else {
+              Main.notify(res.msg, "error");
+            }
+            // $j(form.submitBtn).removeClass("ks-is-loading");
+          });
+        });
+      }
+    },
+    addFacture: (modal) => {
+      if ($j("#action-facture").count() != 0) {
+        Main.formControl("#action-facture", async (form) => {
+          Main.confirm({ text: "" }, async () => {
+            form.data.action = "add_facture";
+            form.data.type = $j(form.obj).data("type");
+            form.data.type != "add"
+              ? (form.data.id = $j(form.obj).data("id"))
+              : (form.data.id = null);
+            $j(form.submitBtn).addClass("ks-is-loading");
+            let res = JSON.parse(
+              await Main.post($j(form.obj).attr("action"), form.data)
+            );
+            if (res.success) {
+              Main.notify("Traitement effectué avec succées");
+              modal.hide();
+            } else {
+              Main.notify(res.msg, "error");
+            }
+            $j(form.submitBtn).removeClass("ks-is-loading");
+          });
+        });
+      }
+    },
+    addLivraison: (modal) => {
+      if ($j("#action-livraison").count() != 0) {
+        Main.formControl("#action-livraison", async (form) => {
+          Main.confirm({ text: "" }, async () => {
+            form.data.action = "add_livraison";
+            form.data.type = $j(form.obj).data("type");
+            form.data.type != "add"
+              ? (form.data.id = $j(form.obj).data("id"))
+              : (form.data.id = null);
+            $j(form.submitBtn).addClass("ks-is-loading");
+            let res = JSON.parse(
+              await Main.post($j(form.obj).attr("action"), form.data)
+            );
+            if (res.success) {
+              Main.notify("Traitement effectué avec succées");
+              modal.hide();
+            } else {
+              Main.notify(res.msg, "error");
+            }
+            $j(form.submitBtn).removeClass("ks-is-loading");
+          });
+        });
+      }
+    },
+    addPaiement: (modal) => {
+      if ($j("#action-paiements").count() != 0) {
+        Main.formControl("#action-paiements", async (form) => {
+          Main.confirm({ text: "" }, async () => {
+            form.data.action = "add_paiement";
+            form.data.type = $j(form.obj).data("type");
+            // form.data.type != "add"
+            //? (form.data.id = $j(form.obj).data("id"))
+            //  : (form.data.id = null);
+            form.data.id = $j(form.obj).data("id");
+            //  $j(form.submitBtn).addClass("ks-is-loading");
+            let res = JSON.parse(
+              await Main.post($j(form.obj).attr("action"), form.data)
+            );
+            if (res.success) {
+              Main.notify("Traitement effectué avec succées");
+              modal.hide();
+            } else {
+              Main.notify(res.msg, "error");
+            }
+            //  $j(form.submitBtn).removeClass("ks-is-loading");
+          });
+        });
+      }
+    },
+    addTransporteur: (modal) => {
+      if ($j("#action-transporteur").count() != 0) {
+        Main.formControl("#action-transporteur", async (form) => {
+          Main.confirm({ text: "" }, async () => {
+            form.data.action = "add_transporteur";
+            form.data.type = $j(form.obj).data("type");
+            form.data.type != "add"
+              ? (form.data.id = $j(form.obj).data("id"))
+              : (form.data.id = null);
+            $j(form.submitBtn).addClass("ks-is-loading");
+            let res = JSON.parse(
+              await Main.post($j(form.obj).attr("action"), form.data)
+            );
+            if (res.success) {
+              Main.notify("Traitement effectué avec succées");
+              modal.hide();
+            } else {
+              Main.notify(res.msg, "error");
+            }
+            $j(form.submitBtn).removeClass("ks-is-loading");
           });
         });
       }
@@ -37,173 +238,47 @@ window.UGEST = {
       if ($j("#loginUser").count() != 0) {
         Main.formControl("#loginUser", async (form) => {
           form.data.action = "login";
-          //$j(form.submitBtn).addClass("ks-is-loading");
+          //   $j(form.submitBtn).addClass("ks-is-loading");
           let res = JSON.parse(
             await Main.post($j(form.obj).attr("action"), form.data)
           );
-          if (res.success == true) {
-            location.href = "user/auth2/"+res.session.id_user;
+
+          if (res.success === true) {
+            if (res.is_maintainance) location.href = "settings";
+            else {
+              location.href = "dashboard";
+            }
+          } else if (res.success == "blocked") {
+            Main.notify("Votre compte à été suspendus ", "error");
           } else {
-            Main.notify("Login ou mot de passe incoreecte");
+            Main.notify("Nom Utilisateur ou Mot de passe Incorrect", "error");
           }
-         // $j(form.submitBtn).removeClass("ks-is-loading");
+          $j(form.submitBtn).removeClass("ks-is-loading");
         });
       }
     },
-    validToken: () => {
-      let subBtn = $("#AuthConfirmation-btn");
-      if ($j("#AuthConfirmation").count() != 0) {
-        subBtn.click(() => {
-          $("#AuthConfirmation").submit();
-        });
-        Main.formControl("#AuthConfirmation", async (form) => {
-          Main.confirm({ text: "" }, async () => {       
-            form.data.action = "valide_token";
-            form.data.id = $j(form.obj).data("id");
-           // subBtn.addClass("ks-is-loading");
-           let res = JSON.parse(
-              await Main.post($j(form.obj).attr("action"), form.data)
-            );
-            if (res.success) {
-              location.href = "../../dashboard";
-            } else {
-              Main.notify(res.msg, "error");
-            }
-            subBtn.removeClass("ks-is-loading");
-          });
+    printFees: () => {
+      if ($j("#pritFacture").count() != 0) {
+        $j("#pritFacture").click(async function (e) {
+          $j.preventDefault(e);
+          $j(".icon", this).addClass("fa-spin");
+          let res = JSON.parse(
+            await Main.get(baseUrl + "factures/print/" + facture.facuteId)
+          );
+          if (res.success) {
+            printJS({ printable: res.base64, type: "pdf", base64: true });
+            $j(".icon", this).removeClass("fa-spin");
+          } else {
+            Main.notify(res.msg, "error");
+            $j(".icon", this).removeClass("fa-spin");
+          }
         });
       }
     },
-
-    updateUser: () => {
-      let subBtn = $("#edit-profil-btn");
-      if ($j("#edit-profil").count() != 0) {
-        subBtn.click(() => {
-          $("#edit-profil").submit();
-        });
-
-        Main.formControl("#edit-profil", async (form) => {
-          Main.confirm({ text: "" }, async () => {
-            form.data.action = "edit-profil";
-            form.data.id = $j(form.obj).data("id");
-            subBtn.addClass("ks-is-loading");
-           let res = JSON.parse(
-              await Main.post($j(form.obj).attr("action"), form.data)
-            );
-            if (res.success) {
-                  Main.notify("Modifié avec success", "success");
-            } else {
-              Main.notify(res.msg, "error");
-            }
-            subBtn.removeClass("ks-is-loading");
-          });
-        });
-      }
-    },
-    ChangePassword: () => {
-      if ($j("#Change-password").count() != 0) {
-        let subBtn = $("#Change-password-btn");
-
-        subBtn.click(() => {
-          $("#Change-password").submit();
-        });
-
-        Main.formControl("#Change-password", async (form) => {
-          Main.confirm({ text: "" }, async () => {
-            form.data.action = "change_Password";
-            let res = JSON.parse(
-              await Main.post($j(form.obj).attr("action"), form.data)
-            );
-            if (res.success) {
-              Main.notify("Mot de pass Modifié avec success");
-            } else {
-              Main.notify(res.msg, "error");
-            }
-            subBtn.removeClass("ks-is-loading");
-          });
-        });
-      }
-    },addAvatar: () => {
-      let subBtn = $("#add-avatar-btn");
-        Main.formControl("#add-avatar", async (form) => {
-          Main.confirm({ text: "" }, async () => {
-            form.data.action = "add-avatar";
-            form.data.id = $j(form.obj).data("id");
-           
-           let res = JSON.parse(
-              await Main.post($j(form.obj).attr("action"), form.data)
-            );
-            if (res.success) {
-                  Main.notify("Importé avec succéss", "success");
-            } else {
-              Main.notify(res.msg, "error");
-            }
-            subBtn.removeClass("ks-is-loading");
-          });
-        });
-      },
   },
-  rdv: {
-    init: () => {
-      UGEST.rdv.addrdv();
-      UGEST.rdv.updaterdv();
-    },
-    addrdv: () => {
-      let subBtn = $("#add-rdv-btn");
-      if ($j("#add-rdv").count() != 0) {
-        subBtn.click(() => {
-          $("#add-rdv").submit();
-        });
-
-        Main.formControl("#add-rdv", async (form) => {
-          Main.confirm({ text: "" }, async () => {       
-            form.data.action = "add_rdv";
-           // subBtn.addClass("ks-is-loading");
-           let res = JSON.parse(
-              await Main.post($j(form.obj).attr("action"), form.data)
-            );
-            if (res.success) {
-                      Main.notify("Votre compte a été créer avec success");
-            } else {
-              Main.notify(res.msg, "error");
-            }
-            subBtn.removeClass("ks-is-loading");
-          });
-        });
-      }
-    }, 
-    updaterdv: () => {
-      let subBtn = $("#update-rdv-btn");
-      if ($j("#update-rdv").count() != 0) {
-        subBtn.click(() => {
-          $("#update-rdv").submit();
-        });
-
-        Main.formControl("#update-rdv", async (form) => {
-          Main.confirm({ text: "" }, async () => {
-            form.data.action = "update_rdv";
-            form.data.id = $j(form.obj).data("rid");
-            //subBtn.addClass("ks-is-loading");
-          let  res = JSON.parse(
-              await Main.post($j(form.obj).attr("action"), form.data)
-            );
-            if (res.success) {
-                  Main.notify("Randez vous modifié avec succéess");
-            } else {
-              Main.notify(res.msg, "error");
-            }
-           // subBtn.removeClass("ks-is-loading");
-          });
-        });
-      }
-    },
-
-  }
 };
-
 $j(window).load(() => {
-  UGEST.user.init();
-  UGEST.rdv.init();
+  UGEST.facturation.init();
 });
 
 export default UGEST;

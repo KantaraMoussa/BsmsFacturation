@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Notification;
-use App\Models\Utlisateurs;
+use App\Models\Users;
 
 
 class Dashboards
@@ -16,7 +16,7 @@ class Dashboards
     public function __construct()
     {
         $this->rdv = new Rdv();
-        $this->user = new Utlisateurs();
+        $this->user = new Users();
         $this->notification = new Notification(); 
     }
     public function rdvEnAttente($field, $data,$field2,$data2)

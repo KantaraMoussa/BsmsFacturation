@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Rdv as modelRdvNew;
-use App\Models\Utlisateurs;
+use App\Models\Users;
 use App\Models\Notification as modelNotification;
 use App\Utils\Helpers as UtilsHelpers;
 
@@ -22,7 +22,7 @@ class Rdv
 
         $this->rdvModel = new modelRdvNew();
         $this->notificationModel = new modelNotification();
-        $this->userModel = new Utlisateurs();
+        $this->userModel = new Users();
     }
 
     public function crud($data)
@@ -43,7 +43,7 @@ class Rdv
         $notificationDesc = "Vous avez réçus une demande de rdv";
         $notificationType = "confirmation de demande";
         $smsText = "Vous avez réçus une demande de rdv";
-        $userReceptRdv = $this->userModel->get('id_user', $data['user'], 0, 1);
+        $userReceptRdv = $this->userModel->get('id_users', $data['user'], 0, 1);
         $id = Helpers::generateString(32);
         $ret = array('msg' => 'unexpected error happen');
         $sql = $this->rdvModel->create(array(
@@ -102,7 +102,7 @@ class Rdv
         UtilsHelpers::sendSms('224'.trim($userEmit['telephone']), $smsText);
         return $ret;
     }
-    public function changeRdvStatus($status, $id): array
+    public function changeRdvStatus($status, $id)
     {
         $ret = array('msg' => 'unexpected error happen');
         $rdv = $this->rdvModel->get_1('id_rdv', $id, 0, 1);
@@ -132,9 +132,8 @@ class Rdv
             'desc_notification' => $notificationDesc,
             'created_at' => time(),
         ));
-       //UtilsHelpers::sendSms('224'.trim($userEmit['telephone']),$smsText );
-        header('Location : ../../');
-       
+       UtilsHelpers::sendSms('224'.trim($userEmit['telephone']),$smsText );
+    
     }
     public function getService($field, $data, $offset, $limit)
     {

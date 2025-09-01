@@ -16,7 +16,7 @@ class TwigFunctions{
        $twig->addFunction(new \Twig\TwigFunction('has_role', function ($role) {
             return UtilsHelpers::hasRoles($role);
         }));
-
+    
         $twig->addFunction(new \Twig\TwigFunction('postgres_to_php_array', function ($pg_array) {
             return Helpers::postgres_to_php_array($pg_array);
         }));
