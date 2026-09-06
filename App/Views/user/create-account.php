@@ -83,7 +83,7 @@
                                         <div class="form-group">
                                             <label>Role : <span class="login-danger">*</span></label>
                                             <select name="role" data-required="yes" id="role" class="form-control js-select2 form-select">
-                                                {{layout.select(role)}}
+                                                {{layout.select(role)|raw}}
                                             </select>
 
                                         </div>

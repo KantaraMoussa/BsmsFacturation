@@ -26,6 +26,7 @@
     <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/animate.min.css">
     <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/datatable.min.css">
     <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/theme.css">
+    <link rel="stylesheet" href="{{base_url()}}css/app-typography.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
@@ -81,7 +82,7 @@
                 <li class="nav-item dropdown has-arrow new-user-menus">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                         <span class="user-img">
-                            <img class="rounded-circle" src="{{base_url()}}assets/img/profiles/avatar-01.jpg" width="31" alt="Ryan Taylor">
+                            <img class="rounded-circle" src="{{base_url()}}{{user_avatar(_SESSION['id_user'])}}" width="31" alt="{{ _SESSION['nom'] }}">
                             <div class="user-text">
                                 <h6>{{ _SESSION['nom'] }}</h6>
                                 <p class="text-muted mb-0">{{ _SESSION['role_utilisateur'] }}</p>
@@ -91,11 +92,11 @@
                     <div class="dropdown-menu">
                         <div class="user-header">
                             <div class="avatar avatar-sm">
-                                <img src="{{base_url()}}assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                <img src="{{base_url()}}{{user_avatar(_SESSION['id_user'])}}" alt="{{ _SESSION['nom'] }}" class="avatar-img rounded-circle">
                             </div>
                             <div class="user-text">
-                                <h6>kantara Moussa</h6>
-                                <p class="text-muted mb-0">Administrateur</p>
+                                <h6>{{ _SESSION['nom'] }}</h6>
+                                <p class="text-muted mb-0">{{ _SESSION['role_utilisateur'] }}</p>
                             </div>
                         </div>
                         <a class="dropdown-item" href="{{ "user/profile/#{_SESSION['id_user']}" | url }}"><i class="fa fa-user"></i>&nbsp; Profile utilisateur</a>
@@ -136,6 +137,15 @@
                             <a href="{{'livraisons' | url }}"><i class="fas fa-truck"></i> <span>Livraisons </span></a>
 
                         </li>
+                        <li>
+                            <a href="{{'engins' | url }}"><i class="fas fa-tractor"></i> <span>Engins </span></a>
+                        </li>
+                        <li>
+                            <a href="{{'chantiers' | url }}"><i class="fas fa-map-marker-alt"></i> <span>Chantiers </span></a>
+                        </li>
+                        <li>
+                            <a href="{{'carburant' | url }}"><i class="fas fa-gas-pump"></i> <span>Carburant </span></a>
+                        </li>
                         <li class=" menu-title">
                             <span class="fw-bolder text-black">Facturation(s)</span>
                         </li>
@@ -156,9 +166,25 @@
                         </li>
                      
                         <li>
-                            <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Reporting </span></a>
-
+                            <a href="{{'rapports/creances' | url }}"><i class="fas fa-chart-line"></i> <span>Créances </span></a>
                         </li>
+                        <li>
+                            <a href="{{'rapports/rentabilite' | url }}"><i class="fas fa-chart-pie"></i> <span>Rentabilité engins </span></a>
+                        </li>
+                        {% if _SESSION['role_utilisateur'] == 'admin' %}
+                        <li class=" menu-title">
+                            <span class="fw-bolder text-black">Administration</span>
+                        </li>
+                        <li>
+                            <a href="{{'setting' | url }}"><i class="fas fa-cogs"></i> <span>Paramètres </span></a>
+                        </li>
+                        <li>
+                            <a href="{{'audit-log' | url }}"><i class="fas fa-history"></i> <span>Journal d'audit </span></a>
+                        </li>
+                        <li>
+                            <a href="{{'notifications' | url }}"><i class="fas fa-bell"></i> <span>Notifications </span></a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -171,9 +197,9 @@
             <!-- Footer -->
             <footer>
                 <p class="text-capitalize lnr-text-align-justify">
-                    Copyright © 2025 KANTARA MOUSSA . <br>
-                    <span>Téléphone : +224 623 90 25 28</span> <br>
-                    <span>Email: moussaizaziszamalkantara@gmail.com</span>
+                    Copyright © {{"now" | date("Y")}} {{company_info()['name']|raw}} . <br>
+                    <span>Téléphone : {{company_info()['telephone']}}</span> <br>
+                    <span>Email: {{company_info()['email']}}</span>
                 </p>
             </footer>
             <!-- /Footer -->

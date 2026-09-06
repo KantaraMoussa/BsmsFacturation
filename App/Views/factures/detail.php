@@ -17,6 +17,12 @@
                     Valider la facture
                 </a>
                 {%endif%}
+
+                {%if role_utilisateur=='admin' and facture['valide_factures'] == 'true' %}
+                <a onclick="return NioApp.loadModal({url:'{{ "avoirs/avoir-action/#{facture['facture_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addAvoir(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-outline-danger">
+                    Émettre un avoir
+                </a>
+                {%endif%}
             </div>
             <div class="col-auto">
                 <div class="invoices-create-btn">
@@ -107,7 +113,7 @@
                                 <div class="col-xl-4 col-lg-6 col-md-6">
                                     <div class="invoice-info">
                                         <strong class="customer-text">Emis par : </strong>
-                                        <h6 class="invoice-name">{{entreprise['name']}}</h6>
+                                        <h6 class="invoice-name">{{entreprise['name']|raw}}</h6>
                                         <p class="invoice-details invoice-details-two">
                                             {{entreprise['telephone']}} <br>
                                             <a href="mailto:{{entreprise['email']}}">{{entreprise['email']}}</a><br>

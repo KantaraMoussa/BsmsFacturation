@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use App\Services\Utilisateur as ServicesUtilisateur;
+use App\Services\Audit;
 use App\Utils\Helpers as utilHelpers;
 use Core\Helpers;
 
@@ -19,21 +20,30 @@ class Connection
 
         $this->utilisateurService = new ServicesUtilisateur();
         $this->login = $login;
-        $this->password = sha1($password);
+        $this->password = $password;
         $this->usersReq = new \App\Models\Users();
     }
     public function is_member()
     {
+        $user = $this->usersReq->get('login_users', $this->login, 0, 1);
 
-        if ($this->usersReq->count2('login_users', $this->login, 'pwd_users', $this->password) == 1) {
-            return true;
-        } else {
+        if (!$user || !utilHelpers::verifyPassword($this->password, $user['pwd_users'])) {
             return false;
         }
+
+        if (utilHelpers::isLegacyHash($user['pwd_users'])) {
+            $this->usersReq->update(
+                array('pwd_users' => password_hash($this->password, PASSWORD_DEFAULT)),
+                'id_users',
+                $user['id_users']
+            );
+        }
+
+        return true;
     }
     public function is_connected()
     {
-        if (empty($_SESSION['id_users']) || empty($_SESSION['email_users'])) {
+        if (empty($_SESSION['id_user']) || empty($_SESSION['email'])) {
             return false;
         } else {
             return true;
@@ -46,6 +56,9 @@ class Connection
 
     public function disconnect()
     {
+        if (!empty($_SESSION['id_user'])) {
+            Audit::log('logout', 'user', $_SESSION['id_user']);
+        }
         $_SESSION[] = array();
         session_destroy();
         unset($_SESSION);
@@ -68,13 +81,11 @@ class Connection
     public function test()
     {
         if (!$this->is_member()) {
+            Audit::log('login_failed', 'user', $this->login);
             return false;
         } else {
             $this->createSession();
-            /*  $token=utilHelpers::randomToken();
-            $this->utilisateurService->updateToken($token);
-            $smsText ="votre code de confirmation "; $smsText.=$token;
-            utilHelpers::sendSms('224'.trim($_SESSION['telephone']),$smsText);*/
+            Audit::log('login', 'user', $_SESSION['id_user']);
             return true;
         }
     }

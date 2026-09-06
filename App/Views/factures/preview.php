@@ -31,7 +31,7 @@
                             <div class="col-md-4">
                                 <div class="invoice-info">
                                     <strong class="customer-text-one">Emis par : </strong>
-                                    <h6 class="invoice-name">{{entreprise['name']}}</h6>
+                                    <h6 class="invoice-name">{{entreprise['name']|raw}}</h6>
                                     <p class="invoice-details">
                                         {{entreprise['telephone']}} <br>
                                         <a href="mailto:{{entreprise['email']}}">{{entreprise['email']}}</a><br>

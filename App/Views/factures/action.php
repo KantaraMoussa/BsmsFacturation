@@ -21,9 +21,22 @@
         <label class="form-label" for="dateEcheance">Date échéance</label>
         <input type="date" class="form-control" name="dateEcheance" id="dateEcheance" data-required="yes">
       </div>
-      <div class="mb-3 form-group col-md-12">
-        <label class="form-label" for="tva">TVA Facture (en %)</label>
-        <input type="text" class="form-control" name="tva" data-min-length="1" id="tva"  data-required="yes">
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="tva">Taxe applicable</label>
+        <select class="form-select" name="tva" id="tva" data-required="yes">
+          {% for taxe in taxes %}
+          <option value="{{taxe['taux_taxes']}}">{{taxe['libelle_taxes']}} ({{taxe['taux_taxes']}}%)</option>
+          {% endfor %}
+          <option value="0">Aucune taxe (0%)</option>
+        </select>
+      </div>
+      <div class="mb-3 form-group col-md-6">
+        <label class="form-label" for="devise">Devise</label>
+        <select class="form-select" name="devise" id="devise" data-required="yes">
+          <option value="GNF" selected>GNF</option>
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+        </select>
       </div>
       <div class="form-group col-md-12 mb-3">
         <label class="form-label" for="libelle">Libelle de la facture (Bref description de la nature de cette facture)</label>
@@ -51,8 +64,13 @@
         <input type="date" class="form-control" name="date_echeance" id="date_echeance" value="{{facture['date_echeance_factures']}}" data-required="yes">
       </div>
        <div class="mb-3 form-group col-md-12">
-        <label class="form-label" for="tva">TVA Facture  (en %)</label>
-        <input type="text" class="form-control" name="tva" data-min-length="1" id="tva" value="{{facture['tva_factures']}}" data-required="yes">
+        <label class="form-label" for="tva">Taxe applicable</label>
+        <select class="form-select" name="tva" id="tva" data-required="yes">
+          {% for taxe in taxes %}
+          <option value="{{taxe['taux_taxes']}}" {% if taxe['taux_taxes'] == facture['tva_factures'] %}selected{% endif %}>{{taxe['libelle_taxes']}} ({{taxe['taux_taxes']}}%)</option>
+          {% endfor %}
+          <option value="0" {% if facture['tva_factures'] == 0 %}selected{% endif %}>Aucune taxe (0%)</option>
+        </select>
       </div>
       <div class="mb-3 form-group col-md-12">
         <label class="form-label" for="statut">Libelle de la facture (Bref description de la nature de cette facture)</label>

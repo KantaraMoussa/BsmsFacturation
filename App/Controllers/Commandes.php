@@ -35,13 +35,13 @@ class Commandes extends \Core\FrontController
      */
     public function indexAction()
     {
-        View::renderTemplate('Commandes/index.php', array(
+        View::renderTemplate('commandes/index.php', array(
             'commandes' => $this->serviceApp->getCommandeListe(),
         ));
     }
     public function detailAction($param)
     {
-        View::renderTemplate('Commandes/detail.php', array( 
+        View::renderTemplate('commandes/detail.php', array( 
             'commande' => $this->serviceApp->getCommande($param['id']),
             'factures' => $this->commandeModel->get_1_2_facture('commande_id', $param['id'], 0, 100),
             'entreprise' => Helpers::information(),
@@ -60,12 +60,14 @@ class Commandes extends \Core\FrontController
             $title = 'Information sur la commande';
         }
         // ------------------ ADD , UPDATE , DELETE
-        View::renderTemplate('Commandes/action.php', array(
+        View::renderTemplate('commandes/action.php', array(
 
             'type' => $params['type'],
             'title' => $title,
             'id' => $params['id'],
             'clients' => $this->clientModel->get_(),
+            'engins' => $this->serviceApp->getEngins(),
+            'chantiers' => $this->serviceApp->getChantiers(),
             'commande' => $this->commandeModel->get_1_0('commande_id', $params['id'], 0, 1),
         ));
     }

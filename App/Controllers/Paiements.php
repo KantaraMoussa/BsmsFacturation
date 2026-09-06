@@ -45,11 +45,12 @@ class Paiements extends \Core\FrontController
         $paiemnt=$this->paiementModel->get_1_1('facture_id_paiements',$params['id'],0,1000);
       
         (!empty($paiemnt) && count($paiemnt)!=0) ? $statusFacture=$paiemnt[0]['statut_factures'] :  $statusFacture='null';
+        $factureLignes = $this->serviceApp->getFactureLineByFacture($params['id']);
         View::renderTemplate('paiements/action.php', array(
              'type' => $params['type'],
               'id' => $params['id'],
               'paiements'=>$paiemnt,
-              'totalApayer'=>$this->serviceApp->getFactureLineByFacture($params['id'])['montantTTC'],
+              'totalApayer'=> $factureLignes['montantTTC'] - $factureLignes['montantAvoir'],
               'statusFacture'=>$statusFacture
         ));
     }

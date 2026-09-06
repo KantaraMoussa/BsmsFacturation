@@ -16,7 +16,35 @@ class Helpers
 
     public static function roleUser(): array
     {
-        return array('administrateur', 'employé', 'client');
+        return array('admin', 'comptabilite', 'commercial', 'saisie');
+    }
+
+    /**
+     * Verify a plaintext password against a stored hash.
+     * Accepts modern password_hash() hashes and, as a migration path,
+     * the legacy unsalted SHA1 hashes used before this fix.
+     */
+    public static function verifyPassword(string $plain, ?string $stored): bool
+    {
+        $stored = trim((string) $stored);
+        if ($stored === '') {
+            return false;
+        }
+
+        if (password_verify($plain, $stored)) {
+            return true;
+        }
+
+        return self::isLegacyHash($stored) && hash_equals($stored, sha1($plain));
+    }
+
+    /**
+     * True if the stored value is a legacy unsalted SHA1 hash (40 hex chars)
+     * rather than a password_hash() hash, and should be rehashed on next login.
+     */
+    public static function isLegacyHash(?string $stored): bool
+    {
+        return (bool) preg_match('/^[a-f0-9]{40}$/i', trim((string) $stored));
     }
 
 
@@ -88,7 +116,7 @@ class Helpers
 
     public static function formatMoney($number)
     {
-        return '<span class="fw-bolder text-black">' . number_format($number) . ' GNF </span>';
+        return '<span class="fw-bolder text-black">' . number_format(floatval($number)) . ' GNF </span>';
     }
 
     public static function getAcronym($text, $minLength = 3): string

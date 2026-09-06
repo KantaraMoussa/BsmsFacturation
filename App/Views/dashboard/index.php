@@ -16,10 +16,28 @@
         </div>
     </div>
     
-     {{layout.navStyle()}}
+     {{layout.navStyle()|raw}}
 
-   
-  
+    {% if contratsExpirant is defined and contratsExpirant|length > 0 %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{contratsExpirant|length}} contrat(s) arrivant à expiration sous 15 jours :</strong>
+        {% for c in contratsExpirant %}
+        <a href="{{ "commandes/detail/#{c['commande_id']}" | url }}">{{c['reference_commandes']}} ({{c['date_fin_commandes']}})</a>{% if not loop.last %}, {% endif %}
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    {% if maintenancesAPrevoir is defined and maintenancesAPrevoir|length > 0 %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Maintenance à prévoir pour {{maintenancesAPrevoir|length}} engin(s) :</strong>
+        {% for m in maintenancesAPrevoir %}
+        <a href="{{ "engins/detail/#{m['engin']['engin_id']}" | url }}">{{m['engin']['numero_interne_engins']}}</a>{% if not loop.last %}, {% endif %}
+        {% endfor %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -40,7 +58,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              {{layout.LayoutListFactures(factures)}}
+                              {{layout.LayoutListFactures(factures)|raw}}
                             </tbody>
                         </table>
                     </div>

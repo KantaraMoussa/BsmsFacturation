@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Services\AppServices;
+use App\Services\Utils;
 use \Core\View;
 use App\Models\Clients as modelClient;
 use App\Models\Commandes;
@@ -15,6 +16,7 @@ class Clients extends \Core\FrontController
     private $clientModel;
     private $serviceApp;
         private $commandeModel;
+    private $utilsService;
 
     public function __construct()
     {
@@ -22,6 +24,7 @@ class Clients extends \Core\FrontController
         $this->clientModel = new modelClient();
          $this->commandeModel = new Commandes();
          $this->serviceApp = new AppServices();
+         $this->utilsService = new Utils();
     }
     /**
      * Show the index page
@@ -30,7 +33,7 @@ class Clients extends \Core\FrontController
      */
     public function indexAction()
     {
-        View::renderTemplate('Clients/index.php', array(
+        View::renderTemplate('clients/index.php', array(
             'clients' => $this->clientModel->get_(),
         ));
     }
@@ -46,7 +49,7 @@ class Clients extends \Core\FrontController
         }else{
            $title='Information client';
         }
-        View::renderTemplate('Clients/action.php', array(
+        View::renderTemplate('clients/action.php', array(
             'type' => $params['type'],
             'id' => $params['id'],
             'title' => $title,
@@ -59,7 +62,7 @@ class Clients extends \Core\FrontController
     {
         // ------------------ ADD , UPDATE , DELETE
         
-        View::renderTemplate('Clients/detail.php', array(
+        View::renderTemplate('clients/detail.php', array(
             'id' => $params['id'],
             'client' => $this->clientModel->get_1_1('client_id', $params['id'], 0, 1),
             'statitistique' => $this->serviceApp->getStateByClient($params['id']),
@@ -68,6 +71,6 @@ class Clients extends \Core\FrontController
           //  'factures' => $this->commandeModel->get_1_2_client('client_id_commandes', $params['id']),
         ));
     }
-    public function before() {}
+    public function before() { $this->utilsService->onBeforeGlobal(); }
     protected function after() {}
 }

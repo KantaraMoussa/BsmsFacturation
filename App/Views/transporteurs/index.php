@@ -19,7 +19,7 @@
         </div>
     </div>
 
- {{layout.navStyle()}}
+ {{layout.navStyle()|raw}}
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-table comman-shadow">
@@ -46,11 +46,13 @@
                                     <th>Email</th>
                                     <th>Téléphone</th>
                                      <th>Poste occupé</th>
+                                    <th>Matricule</th>
+                                    <th>Permis</th>
                                     <th >Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{layout.LayoutListTransporteur(personnelle)}}
+                                {{layout.LayoutListTransporteur(personnelle)|raw}}
                             </tbody>
                         </table>
                     </div>

@@ -44,7 +44,11 @@ class Dashboard extends \Core\FrontController
     public function indexAction() 
     {
         //------------------ notification    
-        View::renderTemplate('dashboard/index.php', array('factures' => $this->appService->getFactureListe() ));
+        View::renderTemplate('dashboard/index.php', array(
+            'factures' => $this->appService->getFactureListe(),
+            'contratsExpirant' => $this->appService->getContratsExpirantBientot(),
+            'maintenancesAPrevoir' => $this->appService->getMaintenancesAPrevoir(),
+        ));
     }
     public function before()
     {

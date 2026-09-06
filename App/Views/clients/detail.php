@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    {{layout.navStyleClient(statitistique)}}
+    {{layout.navStyleClient(statitistique)|raw}}
     <div class="row">
         <div class="col-lg-4">
             {% if client['code_postal_addresses']  %}
@@ -218,7 +218,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{layout.LayoutListFacturesFromClient(factures)}}
+                                {{layout.LayoutListFacturesFromClient(factures)|raw}}
                             </tbody>
                         </table>
                     </div>

@@ -1,8 +1,4 @@
 <?php
 
-namespace JMVC;
-
-require_once ('public' . DIRECTORY_SEPARATOR . 'index.php');
-
-
-?>
+require dirname(__DIR__). '/App/bootstrap.php';
+new \App\Routes();

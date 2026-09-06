@@ -14,10 +14,13 @@ class Articles extends \Core\FrontController
 {
     private $articleModel;
 
+    private $utilsService;
+
     public function __construct()
     {
        session_start();
         $this->articleModel = new modelArticle();
+        $this->utilsService = new Utils();
     }
     /**
      * Show the index page
@@ -26,14 +29,14 @@ class Articles extends \Core\FrontController
      */
     public function indexAction()
     {
-        View::renderTemplate('Articles/index.php', array(
+        View::renderTemplate('articles/index.php', array(
             'articles' => $this->articleModel->get_(),
         ));
     }
     public function detailAction($param)
     {
 
-        View::renderTemplate('Articles/detail.php', array(
+        View::renderTemplate('articles/detail.php', array(
             'article' => $this->articleModel->get_1_1('article_id', $param['id'], 0, 1),
         ));
     }
@@ -49,7 +52,7 @@ class Articles extends \Core\FrontController
         } else {
             $title = 'Information sur l\' article';
         }
-        View::renderTemplate('Articles/action.php', array(
+        View::renderTemplate('articles/action.php', array(
             'type' => $params['type'],
             'id' => $params['id'],
             'article' => $this->articleModel->get_1_1('article_id', $params['id'], 0, 1),
@@ -58,6 +61,6 @@ class Articles extends \Core\FrontController
             'title' => $title,
         ));
     }
-    public function before() {}
+    public function before() { $this->utilsService->onBeforeGlobal(); }
     protected function after() {}
 }

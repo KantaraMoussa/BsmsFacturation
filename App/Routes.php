@@ -19,6 +19,14 @@ class Routes extends \Core\Router
 		$this->transporteur();
 		$this->commande();
 		$this->user();
+		$this->avoir();
+		$this->auditLog();
+		$this->engin();
+		$this->chantier();
+		$this->maintenance();
+		$this->carburant();
+		$this->rapport();
+		$this->notification();
 		parent::dispatch($_SERVER['QUERY_STRING']);
 	}
 	private function addresse()  
@@ -67,11 +75,51 @@ class Routes extends \Core\Router
 		parent::add('livraisons/detail/:id', ['controller' => 'Livraisons', 'action' => 'detail']);
 		parent::add('livraisons/livraison-action/:type/:id', ['controller' => 'Livraisons', 'action' => 'actionDo']);
 	}
-	private function paiement()  
+	private function paiement()
 	{
 		parent::add('paiements', ['controller' => 'Paiements', 'action' => 'index']);
 		parent::add('paiements/detail/:id', ['controller' => 'Paiements', 'action' => 'detail']);
 		parent::add('paiements/paiement-action/:type/:id', ['controller' => 'Paiements', 'action' => 'actionDo']);
+	}
+	private function avoir()
+	{
+		parent::add('avoirs/avoir-action/:id', ['controller' => 'Avoirs', 'action' => 'actionDo']);
+	}
+	private function auditLog()
+	{
+		parent::add('audit-log', ['controller' => 'AuditLog', 'action' => 'index']);
+	}
+	private function engin()
+	{
+		parent::add('engins', ['controller' => 'Engins', 'action' => 'index']);
+		parent::add('engins/detail/:id', ['controller' => 'Engins', 'action' => 'detail']);
+		parent::add('engins/engin-action/:type/:id', ['controller' => 'Engins', 'action' => 'actionDo']);
+	}
+	private function chantier()
+	{
+		parent::add('chantiers', ['controller' => 'Chantiers', 'action' => 'index']);
+		parent::add('chantiers/detail/:id', ['controller' => 'Chantiers', 'action' => 'detail']);
+		parent::add('chantiers/chantier-action/:type/:id', ['controller' => 'Chantiers', 'action' => 'actionDo']);
+	}
+	private function maintenance()
+	{
+		parent::add('maintenance/engin/:id', ['controller' => 'Maintenance', 'action' => 'actionDo']);
+	}
+	private function carburant()
+	{
+		parent::add('carburant', ['controller' => 'Carburant', 'action' => 'index']);
+		parent::add('carburant/engin/:id', ['controller' => 'Carburant', 'action' => 'actionDo']);
+	}
+	private function rapport()
+	{
+		parent::add('rapports/creances', ['controller' => 'Rapports', 'action' => 'creances']);
+		parent::add('rapports/rentabilite', ['controller' => 'Rapports', 'action' => 'rentabilite']);
+	}
+	private function notification()
+	{
+		parent::add('notifications', ['controller' => 'NotificationsController', 'action' => 'index']);
+		parent::add('notifications/generate', ['controller' => 'NotificationsController', 'action' => 'generate']);
+		parent::add('notifications/dispatch', ['controller' => 'NotificationsController', 'action' => 'dispatch']);
 	}
 	private function transporteur()  
 	{
@@ -100,5 +148,13 @@ class Routes extends \Core\Router
 	{
 		parent::add('user/login', ['controller' => 'Users', 'action' => 'loginUser']);
 		parent::add('user/logout', ['controller' => 'Users', 'action' => 'logout']);
+		parent::add('user/profile/:id', ['controller' => 'Users', 'action' => 'profileUser']);
+		parent::add('user/change-password/:id', ['controller' => 'Users', 'action' => 'ChangePassword']);
+		parent::add('user/add-avatar/:id', ['controller' => 'Users', 'action' => 'addAvatar']);
+		parent::add('user/upload', ['controller' => 'Users', 'action' => 'upload']);
+		parent::add('user/crud', ['controller' => 'Users', 'action' => 'crud']);
+		parent::add('user/create', ['controller' => 'Users', 'action' => 'create']);
+		parent::add('user/list', ['controller' => 'Users', 'action' => 'listUser']);
+		parent::add('user/edit-profil/:id', ['controller' => 'Users', 'action' => 'editProfil']);
 	}
 }

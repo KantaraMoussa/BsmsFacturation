@@ -1,0 +1,41 @@
+/*
+ * The base template (assets/css/style.css) declares "roboto, sans-serif"
+ * as its font-family throughout, but Roboto is never actually loaded
+ * anywhere (no @font-face, no Google Fonts link) - every page has been
+ * silently falling back to the browser's default font. DM Sans is
+ * already self-hosted (public/fonts/DMSans-*) for the app's own JS/markup
+ * (NioApp, UGEST.*) but was never wired into the page it's used on, so we
+ * load it here instead of duplicating font files or adding a new
+ * dependency, and apply it as the one typeface used across the app.
+ */
+@font-face {
+  font-family: "DM Sans";
+  src: url("../fonts/DMSans-Bold.eot");
+  src: local("DM Sans Bold"), local("DMSans-Bold"), url("../fonts/DMSans-Bold.eot#iefix") format("embedded-opentype"), url("../fonts/DMSans-Bold.woff2") format("woff2"), url("../fonts/DMSans-Bold.woff") format("woff"), url("../fonts/DMSans-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../fonts/DMSans-Medium.eot");
+  src: local("DM Sans Medium"), local("DMSans-Medium"), url("../fonts/DMSans-Medium.eot#iefix") format("embedded-opentype"), url("../fonts/DMSans-Medium.woff2") format("woff2"), url("../fonts/DMSans-Medium.woff") format("woff"), url("../fonts/DMSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../fonts/DMSans-Regular.eot");
+  src: local("DM Sans Regular"), local("DMSans-Regular"), url("../fonts/DMSans-Regular.eot#iefix") format("embedded-opentype"), url("../fonts/DMSans-Regular.woff2") format("woff2"), url("../fonts/DMSans-Regular.woff") format("woff"), url("../fonts/DMSans-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+.btn, .card, .table, .form-control, .form-select,
+.dropdown-menu, .breadcrumb, .badge, .nav-link, .modal-content {
+  font-family: "DM Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}

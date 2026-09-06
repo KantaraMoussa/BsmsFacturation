@@ -2,49 +2,44 @@
 
 namespace App\Config;
 
+use Core\Env;
 
 /**
- * Application Databse for developpment configuration
+ * Application Database configuration for development.
+ * Values are read from the .env file (see .env.example); no secret is
+ * hardcoded here so the file is safe to keep in version control.
  *
  * PHP version 7.0
  */
 class DatabaseDev
 {
+    public static function getCharset(): string
+    {
+        return Env::get('DB_CHARSET', 'UTF8');
+    }
 
-    /**
-     * Database encodage
-     * @var string
-     */
-    const DB_CHARSET = 'UTF8';
+    public static function getPort(): string
+    {
+        return Env::get('DB_PORT', '5432');
+    }
 
-    /**
-     * Database port
-     * @var string
-     */
-    const DB_PORT = '5432';
+    public static function getHost(): string
+    {
+        return Env::get('DB_HOST', 'localhost');
+    }
 
-    /**
-     * Database host
-     * @var string
-     */
-    const DB_HOST = 'localhost';
+    public static function getName(): string
+    {
+        return Env::get('DB_NAME', '');
+    }
 
-    /**
-     * Database name
-     * @var string
-     */
-     //  const DB_NAME = 'sms';
-     const DB_NAME = 'Facturation';
+    public static function getUser(): string
+    {
+        return Env::get('DB_USER', '');
+    }
 
-    /**
-     * Database user
-     * @var string
-     */
-    const DB_USER = 'postgres';
-
-    /**
-     * Database password
-     * @var string
-     */
-    const DB_PASSWORD = 'stratus05@1993';
+    public static function getPassword(): string
+    {
+        return Env::get('DB_PASSWORD', '');
+    }
 }

@@ -7,11 +7,23 @@ use Core\Helpers as CoreHelpers;
 
 class layout
 {
+    /**
+     * These methods build raw HTML fragments interpolated into Twig with
+     * |raw (autoescape is off for this app's templates), so any user-supplied
+     * free-text field (client name, description, motif, etc.) must be
+     * escaped here - this is the only place that stands between it and a
+     * stored XSS.
+     */
+    private static function esc($value): string
+    {
+        return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+    }
+
     public static function select(array $model)
     {
         $ret = '';
         for ($i = 0; $i < count($model); $i++) {
-            $ret .= '<option value="' . $model[$i] . '">' . $model[$i] . '</option>';
+            $ret .= '<option value="' . self::esc($model[$i]) . '">' . self::esc($model[$i]) . '</option>';
         }
         return $ret;
     }
@@ -21,11 +33,11 @@ class layout
         foreach ($models as $model) {
             $ret .= '
                 <tr>
-                 <td><span>' . $model['libelle_articles'] . ' </span></td>
-                 <td><span>' . $model['marque_articles'] . ' </span></td>
-                 <td><span>' . $model['type_articles'] . ' </span></td>
-                 <td><span>' . $model['quantite_articles'] . ' </span></td>
-                 <td><span>' . $model['cathegorie_articles'] . ' </span></td>
+                 <td><span>' . self::esc($model['libelle_articles']) . ' </span></td>
+                 <td><span>' . self::esc($model['marque_articles']) . ' </span></td>
+                 <td><span>' . self::esc($model['type_articles']) . ' </span></td>
+                 <td><span>' . self::esc($model['quantite_articles']) . ' </span></td>
+                 <td><span>' . self::esc($model['cathegorie_articles']) . ' </span></td>
                   <td class="text-end">
                                      
                                         <div class="actions ">
@@ -49,15 +61,15 @@ class layout
         foreach ($models as $model) {
             $ret .= '
                 <tr>
-                  <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
+                  <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
 
-                 <td><a href="mailto:' . $model['email_clients'] . '">' . $model['email_clients'] . ' </a></td>
-                 <td><span>' . $model['telephone_clients'] . ' </span></td>
-                 <td><span>' . $model['type_addresses'] . ' </span></td>
-                 <td><span>' . $model['rue_addresses'] . ' </span></td>
-                 <td><span>' . $model['ville_addresses'] . ' </span></td>
-                 <td><span>' . $model['code_postal_addresses'] . ' </span></td>
-                 <td><span>' . $model['pays_addresses'] . ' </span></td>
+                 <td><a href="mailto:' . self::esc($model['email_clients']) . '">' . self::esc($model['email_clients']) . ' </a></td>
+                 <td><span>' . self::esc($model['telephone_clients']) . ' </span></td>
+                 <td><span>' . self::esc($model['type_addresses']) . ' </span></td>
+                 <td><span>' . self::esc($model['rue_addresses']) . ' </span></td>
+                 <td><span>' . self::esc($model['ville_addresses']) . ' </span></td>
+                 <td><span>' . self::esc($model['code_postal_addresses']) . ' </span></td>
+                 <td><span>' . self::esc($model['pays_addresses']) . ' </span></td>
                                     <td class="text-end">
                                         <div class="actions ">
                                            <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('addresses/addresse-action/detail/' . $model['adresse_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addAddresse(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
@@ -80,9 +92,9 @@ class layout
         foreach ($models as $model) {
             $ret .= '
                 <tr>
-                 <td><span>' . $model['noms_clients'] . ' </span></td>
-                 <td><span>' . $model['email_clients'] . ' </span></td>
-                 <td><span>' . $model['telephone_clients'] . ' </span></td>
+                 <td><span>' . self::esc($model['noms_clients']) . ' </span></td>
+                 <td><span>' . self::esc($model['email_clients']) . ' </span></td>
+                 <td><span>' . self::esc($model['telephone_clients']) . ' </span></td>
                 <td class="text-end">
                                         <div class="actions ">
                                            <a href="' . CoreHelpers::url('Clients/detail/' . $model['client_id']) . '"   class="btn btn-sm bg-success-light me-2">
@@ -111,14 +123,14 @@ class layout
             }
             $ret .= '
                 <tr>
-                 <td><span class="fw-bolder">' . $model['reference_commandes'] . ' </span></td>
-                 <td><span>' . ($model['date_commandes']) . ' </span></td>
+                 <td><span class="fw-bolder">' . self::esc($model['reference_commandes']) . ' </span></td>
+                 <td><span>' . self::esc($model['date_commandes']) . ' </span></td>
                    <td><span>' . Helpers::formatMoney($model['mttc']) . '  </span></td>
                      <td><span>' . Helpers::formatMoney($model['mpc']) . '  </span></td>
                        <td><span>' . Helpers::formatMoney($model['reste']) . '  </span></td>
-                         <td><span>' . $model['taux'] . '  </span></td>
-                        <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
-                 <td><span class="fw-bolder ' . $textColor . '">' . $model['etat_commandes'] . ' </span></td>
+                         <td><span>' . self::esc($model['taux']) . '  </span></td>
+                        <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+                 <td><span class="fw-bolder ' . $textColor . '">' . self::esc($model['etat_commandes']) . ' </span></td>
                
                   <td class="text-end">
                      <div class="actions ">
@@ -146,16 +158,16 @@ class layout
         foreach ($models as $model) {
             $ret .= '
                 <tr>
-                 <td><span>' . $model['commande_id'] . ' </span></td>
-                 <td><span>' . $model['libelle_articles'] . ' </span></td>
-                 <td><span>' . $model['noms_clients'] . ' </span></td>
-                 <td><span>' . $model['statut_factures'] . ' </span></td>
-                 <td><span>' . $model['quantite_facture_lignes'] . ' </span></td>
+                 <td><span>' . self::esc($model['commande_id']) . ' </span></td>
+                 <td><span>' . self::esc($model['libelle_articles']) . ' </span></td>
+                 <td><span>' . self::esc($model['noms_clients']) . ' </span></td>
+                 <td><span>' . self::esc($model['statut_factures']) . ' </span></td>
+                 <td><span>' . self::esc($model['quantite_facture_lignes']) . ' </span></td>
                  <td><span>' . Helpers::formatMoney($model['prix_unitaire_facture_lignes']) . ' </span></td>
-                 <td><span>' . $model['taux_tva_facture_lignes'] . ' </span></td>
-                 <td><span>' . $model['reference_facture_lignes'] . ' </span></td>
-                 <td><span>' . Helpers::formatMoney($model['montant_ttc_facture_lignes']) . ' </span></td>
-                 <td><span>' . $model['description_facture_lignes'] . ' </span></td>
+                 <td><span>' . self::esc($model['tva_factures'] ?? '') . ' </span></td>
+                 <td><span>' . self::esc($model['reference_facture_lignes']) . ' </span></td>
+                 <td><span>' . Helpers::formatMoney($model['montant_total_facture_lignes'] ?? 0) . ' </span></td>
+                 <td><span>' . self::esc($model['description_facture_lignes']) . ' </span></td>
               </tr>
             ';
         }
@@ -173,18 +185,18 @@ class layout
                 $txtColor = "text-success";
                 $txt = "Facture validée";
             }
-            $taux = number_format(floatval($model['taux']), 2);
+            $taux =    (floatval($model['taux']));
             $ret .= '
                 <tr>
-                   <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . $model['reference_commandes'] . ' </a></td>
-                      <td><span>' . $model['reference_factures'] . ' </span></td>
-            
+                   <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
+                      <td><span>' . self::esc($model['reference_factures']) . ' </span></td>
+
                           <td><span>' . Helpers::formatMoney($model['mttc']) . ' </span></td>
                           <td><span>' .  Helpers::formatMoney($model['mpc']) . ' </span></td>
                           <td><span>' .  Helpers::formatMoney($model['reste']) . ' </span></td>
-                            <td><span>' . $taux . ' % </span></td>
-                      <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
-                
+                            <td><span>' . self::esc($taux) . ' % </span></td>
+                      <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+
                   <td><span class="fw-bolder ' . $txtColor . '">' . $txt . ' </span></td>
                  <td class="text-end">
                                         <div class="actions ">
@@ -219,15 +231,15 @@ class layout
             $ret .= '
                 <tr>
 
-                    <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
-                 <td><span>' . $model['libelle_articles'] . ' </span></td>
-                  <td><span>' . $model['type_articles'] . ' </span></td>
-                   <td><span class="fw-bolder ' . $txtColor . '">' . $model['statut_factures'] . ' </span></td>
-                      <td><span>' . $model['quantite_facture_lignes'] . ' </span></td>
+                    <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+                 <td><span>' . self::esc($model['libelle_articles']) . ' </span></td>
+                  <td><span>' . self::esc($model['type_articles']) . ' </span></td>
+                   <td><span class="fw-bolder ' . $txtColor . '">' . self::esc($model['statut_factures']) . ' </span></td>
+                      <td><span>' . self::esc($model['quantite_facture_lignes']) . ' </span></td>
                     <td><span>' . Helpers::formatMoney($model['prix_unitaire_facture_lignes']) . ' </span></td>
-                    <td><span>' . $model['taux_tva_facture_lignes'] . ' </span></td>
-                   <td><span>' . Helpers::formatMoney($model['montant_ttc_facture_lignes']) . ' </span></td>
-                   <td><span>' . $model['reference_facture_lignes'] . ' </span></td>
+                    <td><span>' . self::esc($model['tva_factures'] ?? '') . ' </span></td>
+                   <td><span>' . Helpers::formatMoney($model['montant_total_facture_lignes'] ?? 0) . ' </span></td>
+                   <td><span>' . self::esc($model['reference_facture_lignes']) . ' </span></td>
                  <td class="text-end">
                                         <div class="actions ">
                                             <a href="' . CoreHelpers::url('factureLignes/detail/' . $model['ligne_id']) . '"
@@ -255,15 +267,15 @@ class layout
         foreach ($models as $model) {
             $ret .= '
                 <tr>
-                  <td>  <a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . $model['reference_commandes'] . ' </a></td>
-                  <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
-                 <td><span>' . $model['libelle_articles'] . ' </span></td>
-               
-                 <td><span>' . $model['date_commandes'] . ' </span></td>
-                 <td><span>' . $model['noms_personnelles'] . ' </span></td>
-                <td><span>' . $model['telephone_personnelles'] . ' </span></td>
-                 <td><span>' . $model['email_personnelles'] . ' </span></td>
-                 <td><span>' . $model['etat_livraisons'] . ' </span></td>
+                  <td>  <a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
+                  <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+                 <td><span>' . self::esc($model['libelle_articles']) . ' </span></td>
+
+                 <td><span>' . self::esc($model['date_commandes']) . ' </span></td>
+                 <td><span>' . self::esc($model['noms_personnelles']) . ' </span></td>
+                <td><span>' . self::esc($model['telephone_personnelles']) . ' </span></td>
+                 <td><span>' . self::esc($model['email_personnelles']) . ' </span></td>
+                 <td><span>' . self::esc($model['etat_livraisons']) . ' </span></td>
                  <td class="text-end">
                                    
                                         <div class="actions ">
@@ -285,13 +297,25 @@ class layout
     {
         $ret = '';
         foreach ($models as $model) {
+            $expiration = $model['date_expiration_permis_personnelles'] ?? null;
+            if ($expiration && $expiration <= date('Y-m-d')) {
+                $permisBadge = '<span class="badge bg-danger">Permis expiré (' . self::esc($expiration) . ')</span>';
+            } elseif ($expiration && $expiration <= date('Y-m-d', strtotime('+30 days'))) {
+                $permisBadge = '<span class="badge bg-warning">Expire le ' . self::esc($expiration) . '</span>';
+            } elseif ($expiration) {
+                $permisBadge = self::esc($expiration);
+            } else {
+                $permisBadge = '<span class="text-muted">-</span>';
+            }
             $ret .= '
                 <tr>
-                 <td><span>' . $model['noms_personnelles'] . ' </span></td>
-                 <td><span>' . $model['email_personnelles'] . ' </span></td>
-                 <td><span>' . $model['telephone_personnelles'] . ' </span></td>
-                 <td><span>' . $model['poste_personnelles'] . ' </span></td>
-           
+                 <td><span>' . self::esc($model['noms_personnelles']) . ' </span></td>
+                 <td><span>' . self::esc($model['email_personnelles']) . ' </span></td>
+                 <td><span>' . self::esc($model['telephone_personnelles']) . ' </span></td>
+                 <td><span>' . self::esc($model['poste_personnelles']) . ' </span></td>
+                 <td><span>' . self::esc($model['matricule_personnelles'] ?? '') . ' </span></td>
+                 <td>' . $permisBadge . '</td>
+
                                         <td class="text-end">
                                         <div class="actions ">
                                            <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('personnelle/transporteur-action/detail/' . $model['personnelle_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addTransporteur(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
@@ -316,14 +340,15 @@ class layout
         foreach ($models as $model) {
             $ret .= '
                 <tr>
-                 <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . $model['reference_commandes'] . ' </a></td>
-                      <td><span>' . $model['reference_factures'] . ' </span></td>
-              
-           
-                                         <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . Helpers::getAcronym($model['noms_clients']) . ' </a></td>
-                 <td><span>' . $model['date_paiements'] . ' </span></td>
+                 <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
+                      <td><span>' . self::esc($model['reference_factures']) . ' </span></td>
+
+
+
+                                         <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+                 <td><span>' . self::esc($model['date_paiements']) . ' </span></td>
                  <td><span>' . Helpers::formatMoney($model['montant_paiements']) . ' </span></td>
-                 <td><span>' . $model['mode_paiements'] . ' </span></td>  
+                 <td><span>' . self::esc($model['mode_paiements']) . ' </span></td>
                  
               </tr>
             ';
@@ -338,9 +363,9 @@ class layout
         foreach ($models as $model) {
             $ret .= '
                 <tr>
-                 <td><span>' . $model['reference_factures'] . ' </span></td>
-                 <td><span>' . $model['libelle_factures'] . ' </span></td>
-                 <td><span>' . $model['statut_factures'] . ' </span></td>
+                 <td><span>' . self::esc($model['reference_factures']) . ' </span></td>
+                 <td><span>' . self::esc($model['libelle_factures']) . ' </span></td>
+                 <td><span>' . self::esc($model['statut_factures']) . ' </span></td>
                  <td class="text-end">
                       <a href="' . CoreHelpers::url('factures/detail/' . $model['facture_id']) . '"
                         class="btn btn-sm bg-success-light me-2 ">
@@ -533,18 +558,18 @@ class layout
                 $txtColor = "text-success";
                 $txt = "Facture validée";
             }
-            $taux = number_format(floatval($model['taux']), 2);
+            $taux = (($model['taux']));
             $ret .= '
                 <tr>
-                   <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . $model['reference_commandes'] . ' </a></td>
-                      <td><span>' . $model['reference_factures'] . ' </span></td>
-            
+                   <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
+                      <td><span>' . self::esc($model['reference_factures']) . ' </span></td>
+
                           <td><span>' . Helpers::formatMoney($model['mttc']) . ' </span></td>
                           <td><span>' .  Helpers::formatMoney($model['mpc']) . ' </span></td>
                           <td><span>' .  Helpers::formatMoney($model['reste']) . ' </span></td>
-                            <td><span>' . $taux . ' % </span></td>
-                    
-                
+                            <td><span>' . self::esc($taux) . ' % </span></td>
+
+
                   <td><span class="fw-bolder ' . $txtColor . '">' . $txt . ' </span></td>
                  <td class="text-end">
                                         <div class="actions ">

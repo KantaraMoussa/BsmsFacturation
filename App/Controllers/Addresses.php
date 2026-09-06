@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+
 use \Core\View;
 use App\Services\Utils;
 use App\Models\Clients;
@@ -29,7 +30,7 @@ class Addresses extends \Core\FrontController
      */
     public function indexAction()
     {
-       View::renderTemplate('Addresses/index.php', array(
+       View::renderTemplate('addresses/index.php', array(
           'addresses' =>$this->addresseModel->get_1_0(),
           
        ));
@@ -37,7 +38,7 @@ class Addresses extends \Core\FrontController
      public function detailAction($param)
     {
 
-        View::renderTemplate('Addresses/detail.php', array(
+        View::renderTemplate('addresses/detail.php', array(
          'addresse' =>$this->addresseModel->get_1_1('adresse_id',$param['id'],0,1),
         ));
     }
@@ -54,7 +55,7 @@ class Addresses extends \Core\FrontController
         }else{
            $title='Information sur l\'addresse du client';
         }
-        View::renderTemplate('Addresses/action.php', array(
+        View::renderTemplate('addresses/action.php', array(
             'clients' =>$this->clientModel->get_(),
             'addresse' =>$this->addresseModel->get_1_1('adresse_id',$params['id'],0,1),
             'type'=>$params['type'],

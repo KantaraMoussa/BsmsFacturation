@@ -28,7 +28,7 @@ class Database
      */
     private static function getCharset()
     {
-        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::DB_CHARSET : DatabaseProd::DB_CHARSET;
+        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::getCharset() : DatabaseProd::getCharset();
     }
 
     /**
@@ -37,7 +37,7 @@ class Database
      */
     private static function getPort()
     {
-        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::DB_PORT : DatabaseProd::DB_PORT;
+        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::getPort() : DatabaseProd::getPort();
     }
 
     /**
@@ -47,7 +47,7 @@ class Database
 
     private static function getHost()
     {
-        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::DB_HOST : DatabaseProd::DB_HOST;
+        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::getHost() : DatabaseProd::getHost();
     }
 
     /**
@@ -56,7 +56,7 @@ class Database
      */
     private static function getName()
     {
-        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::DB_NAME : DatabaseProd::DB_NAME;
+        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::getName() : DatabaseProd::getName();
     }
 
     /**
@@ -65,7 +65,7 @@ class Database
      */
     private static function getUser()
     {
-        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::DB_USER : DatabaseProd::DB_USER;
+        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::getUser() : DatabaseProd::getUser();
     }
 
     /**
@@ -74,7 +74,7 @@ class Database
      */
     private static function getPassword()
     {
-        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::DB_PASSWORD : DatabaseProd::DB_PASSWORD;
+        return Config::DEVELOPMENT_ENVIRONMENT ? DatabaseDev::getPassword() : DatabaseProd::getPassword();
     }
 
     private static function getInstanceConfig(): array

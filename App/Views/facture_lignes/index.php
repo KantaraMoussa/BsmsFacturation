@@ -18,7 +18,7 @@
         </div>
     </div>
 
-   {{layout.navStyle()}}
+   {{layout.navStyle()|raw}}
    
     <div class="row">
         <div class="col-sm-12">
@@ -50,7 +50,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{layout.LayoutListLigneFactures(factureLignes)}}
+                                {{layout.LayoutListLigneFactures(factureLignes)|raw}}
                             </tbody>
                         </table>
                     </div>

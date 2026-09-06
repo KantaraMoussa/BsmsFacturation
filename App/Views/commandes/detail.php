@@ -25,7 +25,7 @@
                                <div class="col-lg-6 col-md-12">
                                    <div class="invoice-info">
                                        <strong class="customer-text">Emis par : </strong>
-                                       <h6 class="invoice-name">{{entreprise['name']}}</h6>
+                                       <h6 class="invoice-name">{{entreprise['name']|raw}}</h6>
                                        <p class="invoice-details invoice-details-two">
                                            {{entreprise['telephone']}} <br>
                                            <a href="mailto:{{entreprise['email']}}">{{entreprise['email']}}</a><br>
@@ -62,7 +62,7 @@
                                                </tr>
                                            </thead>
                                            <tbody>
-                                               {{layout.LayoutListFactureParCommande(factures)}}
+                                               {{layout.LayoutListFactureParCommande(factures)|raw}}
                                            </tbody>
                                        </table>
                                    </div>

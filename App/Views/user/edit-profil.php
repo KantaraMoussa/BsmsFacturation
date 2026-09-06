@@ -1,6 +1,6 @@
 {% extends "base.php" %}
 
-{% block title %}GUI-SCHOOL - Dashboard{% endblock %}
+{% block title %}Facturation BSMS - Mon profil{% endblock %}
 
 {% block body %}
 <div class="content container-fluid">
@@ -13,28 +13,27 @@
 					<h5 class="card-title">Changer les information de votre profile</h5>
 				</div>
 				<div class="card-body">
-					<form action="{{'user/crud' | url}}" method="POST" id="edit-profil" data-id="{{user['id_user']}}">
+					<form action="{{'user/crud' | url}}" method="POST" id="edit-profile" data-id="{{user['id_users']}}">
+						<input type="hidden" name="action" value="edit-profile">
 						<div class="row">
                         <div class="form-group fol-sm-6">
-							<label>Nom : <span class="login-danger">*</span></label>
-							<input type="text" value="{{user['nom']}}" data-required="yes" class="form-control" name="nom" id="nom" required >
+							<label>Nom complet : <span class="login-danger">*</span></label>
+							<input type="text" value="{{user['fname_users']}} {{user['lname_users']}}" data-required="yes" class="form-control" name="nom" id="nom" required >
 						</div>
 						<div class="form-group fol-sm-6">
 							<label>Email : <span class="login-danger">*</span></label>
-							<input type="text" value="{{user['email']}}" data-required="yes" class="form-control" name="email" id="email" required >
+							<input type="email" value="{{user['email_users']}}" data-required="yes" class="form-control" name="email" id="email" required >
 						</div>
                         </div>
 						<div class="row">
                         <div class="form-group fol-sm-6">
 							<label>Telephone : <span class="login-danger">*</span></label>
-							<input type="text" value="{{user['telephone']}}" data-required="yes" class="form-control" name="telephone" id="telephone" required >
+							<input type="text" value="{{user['phone_users']}}" data-required="yes" class="form-control" name="telephone" id="telephone" required >
 						</div>
                         <div class="form-group fol-sm-6">
-							<label>Role : <span class="login-danger">*</span></label>
-							<select class="form-control form-select" name="role" id="role">
-                                <option value="{{user['role_utilisateur']}}">{{user['role_utilisateur']}}</option>
-                                {{layout.select(select)}}
-                            </select>
+							<label>Role</label>
+							<input type="text" class="form-control" value="{{user['type_users']}}" disabled>
+							<small class="text-muted">Seul un administrateur peut modifier votre rôle.</small>
 						</div>
                         </div>
 						<div class="form-group text-center">

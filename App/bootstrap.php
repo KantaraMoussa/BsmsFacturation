@@ -1,9 +1,12 @@
 <?php
 
 //require_once (ROOT . DS . 'Core' . DS . 'main.php');
+require_once dirname(__DIR__) . '/Core/Env.php';
 require_once dirname(__DIR__) . '/Core/Config.php';
 require_once dirname(__DIR__) . '/App/Config/Config.php';
 require dirname(__DIR__) . '/vendor/autoload.php';
+
+\Core\Env::load(dirname(__DIR__) . '/.env');
 
 
 if (\App\Config\Config::DEVELOPMENT_ENVIRONMENT == true) {

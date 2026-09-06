@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    {{layout.navStyle()}}
+    {{layout.navStyle()|raw}}
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-table comman-shadow">
@@ -52,7 +52,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{layout.LayoutListCommandes(commandes)}}
+                                {{layout.LayoutListCommandes(commandes)|raw}}
                             </tbody>
                         </table>
                     </div>

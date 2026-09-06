@@ -24,8 +24,8 @@ abstract class Model
         static $db = null;
 
         if ($db === null) {
-            $dsn = 'mysql:host=' . (Config::DEVELOPMENT_ENVIRONMENT ? Dev::DB_HOST : Prod::DB_HOST ) . ';dbname=' .(Config::DEVELOPMENT_ENVIRONMENT ? Dev::DB_NAME : Prod::DB_NAME ) . ';charset='.(Config::DEVELOPMENT_ENVIRONMENT ? Dev::DB_CHARSET : Prod::DB_CHARSET );
-            $db = new PDO($dsn, Config::DEVELOPMENT_ENVIRONMENT ? Dev::DB_USER : Prod::DB_USER , Config::DEVELOPMENT_ENVIRONMENT ? Dev::DB_PASSWORD : Prod::DB_PASSWORD);
+            $dsn = 'mysql:host=' . (Config::DEVELOPMENT_ENVIRONMENT ? Dev::getHost() : Prod::getHost() ) . ';dbname=' .(Config::DEVELOPMENT_ENVIRONMENT ? Dev::getName() : Prod::getName() ) . ';charset='.(Config::DEVELOPMENT_ENVIRONMENT ? Dev::getCharset() : Prod::getCharset() );
+            $db = new PDO($dsn, Config::DEVELOPMENT_ENVIRONMENT ? Dev::getUser() : Prod::getUser() , Config::DEVELOPMENT_ENVIRONMENT ? Dev::getPassword() : Prod::getPassword());
 
             // Throw an Exception when an error occurs
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

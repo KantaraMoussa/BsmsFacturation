@@ -52,7 +52,13 @@ class View {
 
         if ($twig === null) {
             $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/App/Views');
-            $twig = new \Twig\Environment($loader, ['autoescape'=>false]);
+            // Autoescaping was disabled here; every user-supplied field
+            // (client name, invoice libelle, avoir motif, etc.) rendered
+            // through Twig was raw, unescaped HTML - a stored XSS in every
+            // list/detail page. The few legitimate raw-HTML fragments
+            // (layout.* helpers, the company name span) are now marked
+            // explicitly with the |raw filter instead.
+            $twig = new \Twig\Environment($loader, ['autoescape'=>'html']);
         }
         
         new TwigFilters($twig);

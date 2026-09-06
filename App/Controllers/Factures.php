@@ -40,7 +40,7 @@ class Factures extends \Core\FrontController
      */
     public function indexAction()
     {
-        View::renderTemplate('Factures/index.php', array(
+        View::renderTemplate('factures/index.php', array(
             'factures' => $this->appService->getFactureListe(),
         ));
     }
@@ -51,7 +51,7 @@ class Factures extends \Core\FrontController
 
         $paiement = $this->paiementModel->get_1_1('facture_id_paiements', $param['id'], 0, 1000);
         (count($paiement) == 1) ? $paiement = $paiement[0] : $paiement = $paiement;
-        View::renderTemplate('Factures/detail.php', array(
+        View::renderTemplate('factures/detail.php', array(
             'facture' => $this->factureModel->get_1_3('facture_id', $param['id'], 0, 1),
             'entreprise' => Helpers::information(),
             'factureLignes' => $this->appService->getFactureLineByFacture($param['id']),
@@ -65,7 +65,7 @@ class Factures extends \Core\FrontController
         $paiement = $this->paiementModel->get_1_1('facture_id_paiements', $param['id'], 0, 1000);
         (!empty($paiement)) ? $statusFacture = $paiement[0]['statut_factures'] :  $statusFacture = 'null';
         (count($paiement) == 1) ? $paiement = $paiement[0] : $paiement = $paiement;
-        View::renderTemplate('Factures/preview.php', array(
+        View::renderTemplate('factures/preview.php', array(
             'facture' => $this->factureModel->get_1_3('facture_id', $param['id'], 0, 1),
             'entreprise' => Helpers::information(),
             'factureLignes' => $this->appService->getFactureLineByFacture($param['id']),
@@ -85,12 +85,13 @@ class Factures extends \Core\FrontController
         } else {
             $title = 'Information sur la facture ';
         }
-        View::renderTemplate('Factures/action.php', array(
+        View::renderTemplate('factures/action.php', array(
             'type' => $params['type'],
             'title' => $title,
             'id' => $params['id'],
             'commandes' => $this->commandeModel->get_1_1('etat_commandes', 'en attente', 0, 100),
             'facture' => $this->factureModel->get_1_2('facture_id', $params['id'], 0, 1),
+            'taxes' => $this->appService->getActiveTaxes(),
         ));
     }
 

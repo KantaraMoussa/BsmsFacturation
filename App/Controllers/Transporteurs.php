@@ -29,13 +29,13 @@ class Transporteurs extends \Core\FrontController
      */
     public function indexAction()
     {
-        View::renderTemplate('Transporteurs/index.php', array(
+        View::renderTemplate('transporteurs/index.php', array(
             'personnelle' => $this->transporteurModel->get_(),
         ));
     }
     public function detailAction($param)
     {
-        View::renderTemplate('Transporteurs/detail.php', array(
+        View::renderTemplate('transporteurs/detail.php', array(
             'transporteur' => $this->transporteurModel->get_1_1('personnelle_id', $param['id'], 0, 1),
         ));
     }
@@ -52,7 +52,7 @@ class Transporteurs extends \Core\FrontController
         } else {
             $title = 'Information sur le transporteur ';
         }
-        View::renderTemplate('Transporteurs/action.php', array(
+        View::renderTemplate('transporteurs/action.php', array(
             'type' => $params['type'],
             'id' => $params['id'],
             'title' => $title,

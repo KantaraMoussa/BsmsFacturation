@@ -5,9 +5,9 @@
 {% block body %}
 <div class="content container-fluid">
 
-	{{layout.dashboard()}}
-	{{layout.navigation()}}
-	{{layout.payInvoice(recu,emit,confirmer,annuler,pr,pe,pa,pc)}}
+	{{layout.dashboard()|raw}}
+	{{layout.navigation()|raw}}
+	{{layout.payInvoice(recu,emit,confirmer,annuler,pr,pe,pa,pc)|raw}}
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="card card-table">
@@ -27,7 +27,7 @@
 								</tr>
 							</thead>
 							<tbody>
-						    	{{layout.listUser(Users)}}
+						    	{{layout.listUser(Users)|raw}}
 							</tbody>
 						</table>
 					</div>
