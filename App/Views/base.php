@@ -19,7 +19,6 @@
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="{{base_url()}}assets/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="{{base_url()}}assets/plugins/fontawesome/css/all.min.css">
-
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{base_url()}}assets/css/style.css">
     <!-- other CSS -->
@@ -27,22 +26,17 @@
     <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/datatable.min.css">
     <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/theme.css">
     <link rel="stylesheet" href="{{base_url()}}css/app-typography.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{base_url()}}css/app-layout-fixes.css">
     {% block link %}{% endblock %}
     <script>
         var baseUrl = '{{base_url()}}';
     </script>
 </head>
-
 <body>
     <!-- Main Wrapper -->
     <div class="main-wrapper">
         <!-- Header -->
         <div class="header">
-
             <!-- Logo -->
             <div class="header-left">
                 <a href="{{'dashboard' | url }}" class="logo">
@@ -53,13 +47,11 @@
                 </a>
             </div>
             <!-- /Logo -->
-
             <div class="menu-toggle ">
                 <a href="javascript:void(0);" id="toggle_btn" class="bg-warning text-dark">
                     <i class="fas fa-bars"></i>
                 </a>
             </div>
-
             <!-- Search Bar -->
 
             <!-- /Search Bar -->
@@ -228,52 +220,6 @@
     <script src="{{base_url()}}js/libs/io.min.js"></script>
     <script src="{{base_url()}}js/scripts/jaupl.js"></script>
     <script src="{{base_url()}}js/libs/print.min.js"></script>
-
     <script type="module" src="{{base_url()}}js/scripts/script.js"></script>
-
-
-<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#dataTable').DataTable({
-        dom: 'Bfrtip', // bouton au-dessus du tableau
-        buttons: [
-            {
-                extend: 'csvHtml5',
-                text: 'Exporter CSV',
-                className: 'btn btn-success m-1'
-            },
-            {
-                extend: 'excelHtml5',
-                text: 'Exporter Excel',
-                className: 'btn btn-success m-1'
-            },
-            {
-                extend: 'pdfHtml5',
-                text: 'Exporter PDF',
-                className: 'btn btn-danger m-1'
-            },
-            {
-                extend: 'print',
-                text: 'Imprimer',
-                className: 'btn btn-primary m-1'
-            }
-        ],
-        language: {
-            url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/fr-FR.json'
-        }
-    });
-});
-</script>
-
 </body>
-
 </html>

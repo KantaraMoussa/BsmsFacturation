@@ -26,7 +26,7 @@
             <div class="card bg-comman w-100">
                 <div class="card-body">
                     <h6>{{tranche}}</h6>
-                    <h4><span class="badge {{trancheColors[tranche]}}">{{montant | number_format}} GNF</span></h4>
+                    <h4><span class="badge text-wrap {{trancheColors[tranche]}}" style="max-width: 100%;">{{montant | number_format}} GNF</span></h4>
                 </div>
             </div>
         </div>

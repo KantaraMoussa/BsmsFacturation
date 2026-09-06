@@ -228,6 +228,4 @@
     </div>
 
 </div>
-</div>
-
 {% endblock %}

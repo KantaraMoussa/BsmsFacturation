@@ -146,7 +146,6 @@ class layout
                                     </td>
                 
                 </tr>
-              </tr>
             ';
         }
 
@@ -370,8 +369,8 @@ class layout
                       <a href="' . CoreHelpers::url('factures/detail/' . $model['facture_id']) . '"
                         class="btn btn-sm bg-success-light me-2 ">
                         <i class="feather-eye"></i>
-                          </a>                         
-                 </div>
+                          </a>
+                 </td>
               </tr>
             ';
         }
@@ -580,7 +579,6 @@ class layout
                                          <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('factures/facture-action/update/' . $model['facture_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
                                            <i class="feather-edit"></i>
                                             </a>
-                                             </a>
                                             <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('paiements/paiement-action/add/' . $model['facture_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addPaiement(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
                                            <i class="feather-credit-card"></i>
                                             </a>

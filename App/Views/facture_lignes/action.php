@@ -99,13 +99,13 @@
                 <input class="form-control" data-min-length="1" required="required" type="text" name="depart" id="depart" data-required="yes">
             </div>
             <div class="form-group col-md-6">
-                <label>Fin Index </span></label>
+                <label>Fin Index <span class="login-danger">*</span></label>
                 <input class="form-control" name="fin" id="fin" type="text" data-min-length="1">
             </div>
         </div>
         {%elseif factures['type_pointagefacture_lignes']=='heure'%}
         <div class="form-group col-md-12">
-            <label>Indiquer le nomnbre d'heure travailler </span></label>
+            <label>Indiquer le nomnbre d'heure travailler <span class="login-danger">*</span></label>
             <input class="form-control" name="heure" id="heure" type="number" data-min-length="1">
         </div>
         {%else%}

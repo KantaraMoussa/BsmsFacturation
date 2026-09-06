@@ -37,7 +37,6 @@
             </div>
            
         </div>
-</div>
 {%else %}
 <div class="row" data-id="">
 

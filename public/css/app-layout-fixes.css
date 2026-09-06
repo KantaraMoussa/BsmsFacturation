@@ -1,0 +1,18 @@
+/*
+ * The sidebar (.sidebar-inner) carries a "slimscroll" class expecting a
+ * jQuery slimScroll plugin to give it internal scrolling once the menu
+ * grows taller than the viewport - but that plugin is never actually
+ * loaded (no script include anywhere), and style.css defines no
+ * overflow fallback of its own. .sidebar is position:fixed with a
+ * height capped to the viewport (top:60px to bottom:0), so once the
+ * menu list is taller than that box, the extra items don't scroll -
+ * they render past the sidebar's boundary, on top of (z-index:1001)
+ * whatever page content/footer sits at that height. This became a lot
+ * more likely to trigger once the menu grew past a dozen items.
+ * Fix: give the inner container its own scroll instead of relying on
+ * the missing plugin.
+ */
+.sidebar-inner {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
