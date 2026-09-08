@@ -30,7 +30,7 @@
                                 <h3 class="page-title">Lisvraisons Programmées</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" onclick="return NioApp.loadModal({url:'{{ 'livraisons/livraison-action/add/null' | url }}',afterLoad:function(myModal){UGEST.facturation.addLivraison(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                <a href="{{ 'livraisons/livraison-action/add/null' | url }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
                     </div>

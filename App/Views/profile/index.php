@@ -179,7 +179,7 @@
                                                                     <div class="nk-block-actions flex-shrink-sm-0">
                                                                         <ul class="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
                                                                             <li class="order-md-last">
-                                                                                <a href="#" onclick="return NioApp.loadModal({url:'{{ 'profile/change-password' | url }}',afterLoad:function(myModal){UGEST.admin.ajx.changeUserPassword(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-primary">Changer le mot de passe</a>
+                                                                                <a href="{{ 'profile/change-password' | url }}" class="btn btn-primary">Changer le mot de passe</a>
                                                                             </li>
                                                                             <li>
                                                                                 <em class="text-soft text-date fs-12px">Changer le mot de passe: <span>Oct 2, 2019</span></em>

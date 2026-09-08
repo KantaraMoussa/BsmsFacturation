@@ -25,7 +25,7 @@ class Users extends \Core\FrontController
     /**
      * Actions restricted to the admin role (managing other users' accounts).
      */
-    private const ADMIN_ACTIONS = ['user/list', 'user/create'];
+    private const ADMIN_ACTIONS = ['user/list', 'user/create', 'user/manage'];
 
     public function __construct()
     {
@@ -49,6 +49,14 @@ class Users extends \Core\FrontController
     public function createAction()
     {
         View::renderTemplate('user/create-account.php', array('role' => Helpers::roleUser()));
+    }
+
+    public function manageAction($param)
+    {
+        View::renderTemplate('user/manage.php', array(
+            'user' => $this->userService->getUser('id_users', $param['id'], 0, 1),
+            'roles' => Helpers::roleUser(),
+        ));
     }
 
     /**

@@ -11,7 +11,7 @@
                 <div class="page-sub-header">
                     <h3 class="page-title fw-bolder">Client | <span class="text-warning">{{client['noms_clients']}}</span></h3>
                     <ul class="breadcrumb">
-                        <a href="#" onclick="return NioApp.loadModal({url:'{{ "Clients/client-action/update/#{client['client_id']}"  | url }}',afterLoad:function(myModal){UGEST.facturation.addClient(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-warning text-white"><i
+                        <a href="{{ "Clients/client-action/update/#{client['client_id']}"  | url }}" class="btn btn-warning text-white"><i
                                 class="fas fa-edit"></i></a>
                     </ul>
                 </div>
@@ -31,7 +31,7 @@
                                     <h3 class="page-title">Addresse du client</h3>
                                 </div>
                                 <div class="col-auto text-end float-end ms-auto download-grp">
-                                    <a href="#" onclick="return NioApp.loadModal({url:'{{ "addresses/addresse-action/update/#{client['adresse_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addAddresse(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-primary"><i
+                                    <a href="{{ "addresses/addresse-action/update/#{client['adresse_id']}" | url }}" class="btn btn-primary"><i
                                             class="fas fa-edit"></i></a>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                                 <div class="calandar-event-name">
                                     <h4>
                                     
-                                    <a href="#" onclick="return NioApp.loadModal({url:'{{ "commandes/detail/#{commande['commande_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addCommande(myModal)}},{hi:this,type:'modal-lg'})"> {{commande['reference_commandes'] }} </a></h4>
+                                    <a href="{{ "commandes/detail/#{commande['commande_id']}" | url }}"> {{commande['reference_commandes'] }} </a></h4>
                                     <h5 class="fw-bolder text-black">{{commande['etat_commandes'] }}</h5>
                                 </div>
                                 <span class="fw-bolder text-black">MTTC: {{commande['mttc'] | number_format }} GNF</span>
@@ -172,7 +172,7 @@
                 </div>
                 <div class="card-footer">
                     <div align="right">
-                        <a href="#" onclick="return NioApp.loadModal({url:'{{ 'commandes/commande-action/add/null' | url }}',afterLoad:function(myModal){UGEST.facturation.addCommande(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-primary"><i
+                        <a href="{{ 'commandes/commande-action/add/null' | url }}" class="btn btn-primary"><i
                                 class="fas fa-plus"></i>&nbsp; Créer une Commande </a>
                     </div>
 
@@ -190,14 +190,14 @@
                                 <h3 class="page-title">Listes des factures</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" onclick="return NioApp.loadModal({url:'{{ 'factures/facture-action/add/null' | url }}',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-primary"><i
+                                <a href="{{ 'factures/facture-action/add/null' | url }}" class="btn btn-primary"><i
                                         class="fas fa-plus"></i>&nbsp;Nouvelle Facture</a>
                             </div>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <table
-                            class="table table-bordered" id="dataTable">
+                            class="table border-0 star-student table-hover table-center mb-0 datatable table-striped" id="dataTable">
                             <thead class="student-thread">
                                 <tr>
                                     <th>#Commande</th>

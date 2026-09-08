@@ -23,10 +23,10 @@
     <link rel="stylesheet" href="{{base_url()}}assets/css/style.css">
     <!-- other CSS -->
     <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/animate.min.css">
-    <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/datatable.min.css">
+    <link id="skin-default" rel="stylesheet" href="{{base_url() ~ asset_v('assets/plugins/datatables/datatables.min.css')}}">
     <link id="skin-default" rel="stylesheet" href="{{base_url()}}css/theme.css">
-    <link rel="stylesheet" href="{{base_url()}}css/app-typography.css">
-    <link rel="stylesheet" href="{{base_url()}}css/app-layout-fixes.css">
+    <link rel="stylesheet" href="{{base_url() ~ asset_v('css/app-typography.css')}}">
+    <link rel="stylesheet" href="{{base_url() ~ asset_v('css/app-layout-fixes.css')}}">
     {% block link %}{% endblock %}
     <script>
         var baseUrl = '{{base_url()}}';
@@ -165,6 +165,12 @@
                         </li>
                         {% if _SESSION['role_utilisateur'] == 'admin' %}
                         <li class=" menu-title">
+                            <span class="fw-bolder text-black">Direction</span>
+                        </li>
+                        <li>
+                            <a href="{{'rapports/direction' | url }}"><i class="fas fa-tachometer-alt"></i> <span>Pilotage Direction </span></a>
+                        </li>
+                        <li class=" menu-title">
                             <span class="fw-bolder text-black">Administration</span>
                         </li>
                         <li>
@@ -211,7 +217,9 @@
     {% block script %}{% endblock %}
      <script src="{{base_url()}}assets/js/jquery-3.6.0.min.js"></script>
     <script src="{{base_url()}}assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="{{base_url()}}assets/js/script.js"></script>
+    <script src="{{base_url()}}assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="{{base_url() ~ asset_v('assets/plugins/datatables/datatables.min.js')}}"></script>
+    <script src="{{base_url() ~ asset_v('assets/js/script.js')}}"></script>
     <!-- JS other -->
     <!-- JavaScript -->
     <script src="{{base_url()}}js/scripts/__jlive.js"></script>
@@ -220,6 +228,7 @@
     <script src="{{base_url()}}js/libs/io.min.js"></script>
     <script src="{{base_url()}}js/scripts/jaupl.js"></script>
     <script src="{{base_url()}}js/libs/print.min.js"></script>
-    <script type="module" src="{{base_url()}}js/scripts/script.js"></script>
+    <script type="module" src="{{base_url() ~ asset_v('js/scripts/script.js')}}"></script>
+    <script src="{{base_url() ~ asset_v('js/scripts/idle-logout.js')}}"></script>
 </body>
 </html>

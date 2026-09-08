@@ -3,6 +3,7 @@
 namespace Core;
 
 use App\Utils\Helpers as UtilsHelpers;
+use App\Services\Utils as AppUtils;
 
 class TwigFunctions{
 
@@ -33,6 +34,16 @@ class TwigFunctions{
                 }
             }
             return 'assets/img/avatar.png';
+        }));
+
+        $twig->addFunction(new \Twig\TwigFunction('is_online', function ($user) {
+            return AppUtils::isOnline($user);
+        }));
+
+        $twig->addFunction(new \Twig\TwigFunction('asset_v', function ($path) {
+            $file = dirname(__DIR__) . '/public/' . ltrim($path, '/');
+            $v = is_file($file) ? filemtime($file) : time();
+            return $path . '?v=' . $v;
         }));
 
     }

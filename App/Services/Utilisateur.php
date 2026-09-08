@@ -17,7 +17,7 @@ class Utilisateur
      * profile) are scoped to $_SESSION['id_user'] instead and are open to
      * any authenticated role.
      */
-    private const ADMIN_ONLY_ACTIONS = ['add_user'];
+    private const ADMIN_ONLY_ACTIONS = ['add_user', 'admin_update_user', 'admin_toggle_status'];
 
     public function __construct()
     {
@@ -38,6 +38,10 @@ class Utilisateur
             return json_encode($this->ChangeUserPassword($data));
         } else if ($data['action'] == "edit-profile") {
             return json_encode($this->updateUser($data));
+        } else if ($data['action'] == "admin_update_user") {
+            return json_encode($this->adminUpdateUser($data));
+        } else if ($data['action'] == "admin_toggle_status") {
+            return json_encode($this->adminToggleStatus($data));
         }
 
         return json_encode(array('success' => false, 'msg' => "Action inconnue"));
@@ -161,6 +165,70 @@ class Utilisateur
         return $ret;
     }
 
+
+    /**
+     * Admin-only: edit any user's identity, role and status. The target id
+     * comes from the form ($data['id']), unlike updateUser() which is
+     * self-service only and always scoped to the session.
+     */
+    public function adminUpdateUser(array $data): array
+    {
+        $ret = array('msg' => 'unexpected error happen');
+        $target = $this->userModel->get('id_users', $data['id'], 0, 1);
+        if (!$target) {
+            $ret['success'] = false;
+            $ret['msg'] = "Utilisateur introuvable ";
+            return $ret;
+        }
+        if (!in_array($data['role'], UtilsHelpers::roleUser(), true)) {
+            $ret['success'] = false;
+            $ret['msg'] = "Role invalide ";
+            return $ret;
+        }
+
+        $nomParts = explode(' ', trim($data['nom']), 2);
+        $sql = $this->userModel->update(array(
+            'fname_users' => $nomParts[0],
+            'lname_users' => $nomParts[1] ?? '',
+            'email_users' => $data['email'],
+            'phone_users' => $data['telephone'],
+            'type_users' => $data['role'],
+        ), 'id_users', $data['id']);
+
+        $ret['success'] = $sql == true;
+        if ($ret['success']) {
+            Audit::log('admin_update_user', 'user', $data['id'], $target, array('role' => $data['role']));
+        }
+        return $ret;
+    }
+
+    /**
+     * Admin-only: toggle a user's account between actif/inactif. An
+     * inactive account can no longer log in (checked in Connection).
+     */
+    public function adminToggleStatus(array $data): array
+    {
+        $ret = array('msg' => 'unexpected error happen');
+        $target = $this->userModel->get('id_users', $data['id'], 0, 1);
+        if (!$target) {
+            $ret['success'] = false;
+            $ret['msg'] = "Utilisateur introuvable ";
+            return $ret;
+        }
+        if ($data['id'] === ($_SESSION['id_user'] ?? null)) {
+            $ret['success'] = false;
+            $ret['msg'] = "Vous ne pouvez pas désactiver votre propre compte ";
+            return $ret;
+        }
+        $newStatus = trim((string) $target['status_users']) === 'actif' ? 'inactif' : 'actif';
+        $sql = $this->userModel->update(array('status_users' => $newStatus), 'id_users', $data['id']);
+
+        $ret['success'] = $sql == true;
+        if ($ret['success']) {
+            Audit::log('admin_toggle_status', 'user', $data['id'], $target, array('status' => $newStatus));
+        }
+        return $ret;
+    }
 
     public function getUtilisateur($field, $data, $offset, $limit): array
     {

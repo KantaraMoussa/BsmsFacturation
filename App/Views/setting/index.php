@@ -27,7 +27,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive mb-4">
-                        <table class="table table-striped table-bordered">
+                        <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                             <thead class="student-thread">
                                 <tr>
                                     <th>Libellé</th>

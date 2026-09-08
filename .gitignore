@@ -15,6 +15,9 @@ public/students_import
 public/images/photos
 public/images/qr
 
+# App runtime files (error log, KPI dashboard cache)
+tmp/
+
 # Compiled Java class files
 *.class
 

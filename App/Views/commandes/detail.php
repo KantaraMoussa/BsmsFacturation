@@ -1,135 +1,132 @@
-   <div class="modal-body">
-       <div class="row justify-content-center">
-           <div class="col-lg-12">
-               <div class="card invoice-info-card">
-                   <div class="card-body pb-0">
-                       <div class="invoice-item invoice-item-one">
-                           <div class="row">
-                               <div class="col-md-6">
-                                   <div class="invoice-logo">
-                                       <img src="{{base_url()}}assets/img/logo-bsms/logo.png" alt="logo">
-                                   </div>
-                               </div>
-                               <div class="col-md-6">
-                                   <div class="invoice-info">
-                                       <div class="invoice-head">
-                                           <h2 class="text-warning">Commande</h2>
-                                           <p>Réference : {{commande['reference_commandes']}}</p>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="invoice-item">
-                           <div class="row">
-                               <div class="col-lg-6 col-md-12">
-                                   <div class="invoice-info">
-                                       <strong class="customer-text">Emis par : </strong>
-                                       <h6 class="invoice-name">{{entreprise['name']|raw}}</h6>
-                                       <p class="invoice-details invoice-details-two">
-                                           {{entreprise['telephone']}} <br>
-                                           <a href="mailto:{{entreprise['email']}}">{{entreprise['email']}}</a><br>
-                                           {{entreprise['BP']}} , {{entreprise['ville']}}
-                                       </p>
-                                   </div>
-                               </div>
-                               <div class="col-lg-6 col-md-12">
-                                   <div class="invoice-info">
-                                       <strong class="customer-text-one">Facturé à</strong>
-                                       <h6 class="invoice-name">{{commande['noms_clients']}}</h6>
-                                       <p class="invoice-details invoice-details-two">
-                                           {{commande['telephone_clients']}} /
-                                           <a href="mailto: {{commande['email_clients']}} "> {{commande['email_clients']}} </a><br>
-                                           {{commande['rue_addresses']}} , <br>
-                                           BP {{commande['code_postal_addresses']}} , {{commande['ville_addresses']}} - {{commande['pays_addresses']}}
-                                       </p>
-                                   </div>
-                               </div>
+{% extends "base.php" %}
 
-                           </div>
-                       </div>
-                       <div class="invoice-item invoice-table-wrap">
-                           <div class="row">
-                               <h5 class="text-dark">Listes des factures Emises : </h5>
-                               <div class="col-md-12">
-                                   <div class="table-responsive">
-                                       <table class="table table-center mb-0 table-bordered">
-                                           <thead>
-                                               <tr>
-                                                   <th>N°</th>
-                                                   <th>Libelle</th>
-                                                   <th>Etat</th>
-                                               </tr>
-                                           </thead>
-                                           <tbody>
-                                               {{layout.LayoutListFactureParCommande(factures)|raw}}
-                                           </tbody>
-                                       </table>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                       <hr>
-                       <div class="row align-items-center justify-content-center">
-                           <div class="col-lg-2 col-md-2">
+{% block title %} Détail commande {% endblock %}
 
-                           </div>
-                           <div class="col-lg-12 col-md-12">
-                               <div class="invoice-total-card">
-                                   <div class="invoice-total-box">
-                                       <div class="invoice-total-inner">
-                                           <p>Montant Payé <span>{{commande['mpc'] | number_format }} GNF</span></p>
-                                           <p>Reste <span>{{commande['reste'] | number_format }} GNF</span></p>
-                                           <p> % <span>{{commande['taux']}}</span></p>
-                                       </div>
-                                       <div class="invoice-total-footer">
-                                           <h4>Montant total commande <span>{{commande['mttc'] | number_format }} GNF</span></h4>
-                                          
-                                       </div>
-                                       
-                                   </div>
-                                    <h4 class="customer-text text-danger text-center">{{commande['ChiffreEnLettre'] }}</h4>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="card d-none">
-                           <div class="card-header bg-dark">
-                               <h3 class="card-title text-warning">Ajouté une facture à la commande</h3>
-                           </div>
-                           <div class="card-body">
-                               <form action="{{ 'factures/crud' | url }}" class="pt-2" id="action-facture" data-type="add">
+{% block body %}
+<div class="content container-fluid">
 
-                                   <div class="row">
-                                       <div class="form-group col-md-12 mb-3">
-                                           <label class="form-label">Commande </label>
-                                           <select class="form-select" name="commande" id="commande">
-                                               <option value="{{commande['commande_id']}}">{{commande['noms_clients']}} - <span class="text-primary">{{commande['reference_commandes']}}</span> </option>
-                                           </select>
-                                       </div>
-                                       <div class="form-group col-md-6 mb-3">
-                                           <label class="form-label" for="dateEmission">Date émission</label>
-                                           <input type="date" class="form-control" name="dateEmission" id="dateEmission">
-                                       </div>
-                                       <div class="form-group col-md-6 mb-3">
-                                           <label class="form-label" for="dateEcheance">Date échéance</label>
-                                           <input type="date" class="form-control" name="dateEcheance" id="dateEcheance">
-                                       </div>
-                                       <div class="form-group col-md-12 mb-3">
-                                           <label class="form-label" for="libelle">Libelle de la facture (Bref description de la nature de cette facture)</label>
-                                           <input type="text" class="form-control" name="libelle" id="libelle" placeholder="en 140 mots">
-                                       </div>
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title fw-bolder">Commande | <span class="text-warning">{{commande['reference_commandes']}}</span></h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{'commandes' | url}}">Commandes</a></li>
+                    <li class="breadcrumb-item active">{{commande['reference_commandes']}}</li>
+                </ul>
+            </div>
+            <div class="col-auto">
+                <a href="{{ "commandes/commande-action/update/#{commande['commande_id']}" | url }}" class="btn btn-warning">
+                    <i class="feather-edit"></i>&nbsp;Modifier
+                </a>
+                <a href="{{ 'factures/facture-action/add/null' | url }}" class="btn btn-primary">
+                    <i class="feather-file-plus"></i>&nbsp;Nouvelle facture
+                </a>
+                {% if _SESSION['role_utilisateur'] == 'admin' %}
+                <a href="{{ "commandes/commande-action/delete/#{commande['commande_id']}" | url }}" class="btn btn-danger">
+                    <i class="feather-trash-2"></i>&nbsp;Supprimer
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
-                                       <div class="form-group col-md-6 mb-3">
-                                           <button type="submit" class="btn btn-info">Enregistrer la facture</button>
-                                       </div>
-                                   </div>
-
-                               </form>
-                           </div>
-                       </div>
-
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card invoice-info-card">
+                <div class="card-body pb-0">
+                    <div class="invoice-item invoice-item-one">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="invoice-logo">
+                                    <img src="{{base_url()}}assets/img/logo-bsms/logo.png" alt="logo">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="invoice-info">
+                                    <div class="invoice-head">
+                                        <h2 class="text-warning">Commande</h2>
+                                        <p>Réference : {{commande['reference_commandes']}}</p>
+                                        <p>État : <span class="fw-bolder">{{commande['etat_commandes']}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="invoice-item">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="invoice-info">
+                                    <strong class="customer-text">Emis par : </strong>
+                                    <h6 class="invoice-name">{{entreprise['name']|raw}}</h6>
+                                    <p class="invoice-details invoice-details-two">
+                                        {{entreprise['telephone']}} <br>
+                                        <a href="mailto:{{entreprise['email']}}">{{entreprise['email']}}</a><br>
+                                        {{entreprise['BP']}} , {{entreprise['ville']}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="invoice-info">
+                                    <strong class="customer-text-one">Facturé à</strong>
+                                    <h6 class="invoice-name"><a href="{{ "Clients/detail/#{commande['client_id_commandes']}" | url }}">{{commande['noms_clients']}}</a></h6>
+                                    <p class="invoice-details invoice-details-two">
+                                        {{commande['telephone_clients']}}
+                                        {% if commande['email_clients'] %} / <a href="mailto:{{commande['email_clients']}}">{{commande['email_clients']}}</a>{% endif %}
+                                        {% if commande['rue_addresses'] or commande['ville_addresses'] %}
+                                        <br>
+                                        {{commande['rue_addresses']}} , <br>
+                                        BP {{commande['code_postal_addresses']}} , {{commande['ville_addresses']}} - {{commande['pays_addresses']}}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="invoice-item invoice-table-wrap">
+                        <div class="row">
+                            <h5 class="text-dark">Listes des factures Emises : </h5>
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-center mb-0 table-bordered datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>N°</th>
+                                                <th>Libelle</th>
+                                                <th>Etat</th>
+                                                <th class="text-end">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{layout.LayoutListFactureParCommande(factures)|raw}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="invoice-total-card">
+                                <div class="invoice-total-box">
+                                    <div class="invoice-total-inner">
+                                        <p>Montant Payé <span>{{commande['mpc'] | number_format }} GNF</span></p>
+                                        <p>Reste <span>{{commande['reste'] | number_format }} GNF</span></p>
+                                        <p>% Payé <span>{{commande['taux']}}</span></p>
+                                    </div>
+                                    <div class="invoice-total-footer">
+                                        <h4>Montant total commande <span>{{commande['mttc'] | number_format }} GNF</span></h4>
+                                    </div>
+                                </div>
+                                {% if commande['mttc'] > 0 %}
+                                <h4 class="customer-text text-danger text-center">{{commande['ChiffreEnLettre'] }}</h4>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

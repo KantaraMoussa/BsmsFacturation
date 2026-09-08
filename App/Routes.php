@@ -114,6 +114,9 @@ class Routes extends \Core\Router
 	{
 		parent::add('rapports/creances', ['controller' => 'Rapports', 'action' => 'creances']);
 		parent::add('rapports/rentabilite', ['controller' => 'Rapports', 'action' => 'rentabilite']);
+		parent::add('rapports/direction', ['controller' => 'Rapports', 'action' => 'direction']);
+		parent::add('rapports/direction-data', ['controller' => 'Rapports', 'action' => 'directionData']);
+		parent::add('rapports/direction-detail', ['controller' => 'Rapports', 'action' => 'directionDetail']);
 	}
 	private function notification()
 	{
@@ -156,5 +159,6 @@ class Routes extends \Core\Router
 		parent::add('user/create', ['controller' => 'Users', 'action' => 'create']);
 		parent::add('user/list', ['controller' => 'Users', 'action' => 'listUser']);
 		parent::add('user/edit-profil/:id', ['controller' => 'Users', 'action' => 'editProfil']);
+		parent::add('user/manage/:id', ['controller' => 'Users', 'action' => 'manage']);
 	}
 }

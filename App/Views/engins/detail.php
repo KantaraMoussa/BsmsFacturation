@@ -11,17 +11,17 @@
                 <h3 class="page-title">Engin {{engin['numero_interne_engins']}}</h3>
             </div>
             <div class="col-auto">
-                <a onclick="return NioApp.loadModal({url:'{{ "engins/engin-action/update/#{engin['engin_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addEngin(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-warning">
+                <a href="{{ "engins/engin-action/update/#{engin['engin_id']}" | url }}"  class="btn btn-warning">
                     <i class="feather-edit"></i>&nbsp;Modifier
                 </a>
-                <a onclick="return NioApp.loadModal({url:'{{ "maintenance/engin/#{engin['engin_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addMaintenance(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-outline-secondary">
+                <a href="{{ "maintenance/engin/#{engin['engin_id']}" | url }}"  class="btn btn-outline-secondary">
                     <i class="feather-tool"></i>&nbsp;Maintenance
                 </a>
-                <a onclick="return NioApp.loadModal({url:'{{ "carburant/engin/#{engin['engin_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addCarburant(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-outline-secondary">
+                <a href="{{ "carburant/engin/#{engin['engin_id']}" | url }}"  class="btn btn-outline-secondary">
                     <i class="feather-droplet"></i>&nbsp;Carburant
                 </a>
                 {% if role_utilisateur == 'admin' %}
-                <a onclick="return NioApp.loadModal({url:'{{ "engins/engin-action/delete/#{engin['engin_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addEngin(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-danger">
+                <a href="{{ "engins/engin-action/delete/#{engin['engin_id']}" | url }}"  class="btn btn-danger">
                     <i class="feather-trash-2"></i>&nbsp;Supprimer
                 </a>
                 {% endif %}

@@ -31,7 +31,7 @@
                                 <h3 class="page-title">Lignes des factures</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" onclick="return NioApp.loadModal({url:'{{ 'factureLignes/factureLigne-action/add/null' | url }}',afterLoad:function(myModal){UGEST.facturation.addFactureLigne(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-primary"><i
+                                <a href="{{ 'factureLignes/factureLigne-action/add/null' | url }}" class="btn btn-primary"><i
                                         class="fas fa-plus"></i></a>
                             </div>
                         </div>
@@ -43,9 +43,13 @@
                                 <tr>
                                     <th>Clients</th>
                                     <th>Article</th>
-                                    <th>Réference</th>
-                                    <th>Montant</th>
+                                    <th>Type</th>
                                     <th>Etat de la facture</th>
+                                    <th>Quantité</th>
+                                    <th>Prix unitaire</th>
+                                    <th>TVA</th>
+                                    <th>Montant</th>
+                                    <th>Réference</th>
                                     <th class="text-end">Action</th>
                                 </tr>
                             </thead>

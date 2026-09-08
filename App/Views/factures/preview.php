@@ -64,7 +64,7 @@
                                     <h6 class="invoice-name text-success">Date paiement : {{paiements['date_paiements'] | date('d/m/Y')}} </h6>
                                     {%else %}
                                     <h4 class="invoice-name text-danger">Cette facture n'est pas encore payée</h4>
-                                    <p> <a href="#" onclick="return NioApp.loadModal({url:'{{ "paiements/paiement-action/add/#{facture['facture_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addPaiement(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-danger text-white fw-bolder">
+                                    <p> <a href="{{ "paiements/paiement-action/add/#{facture['facture_id']}" | url }}" class="btn btn-danger text-white fw-bolder">
                                             <i class="fas fa-plus"></i>&nbsp;Procedé au paiement</a></p>
 
                                     {% endif %}
@@ -148,7 +148,7 @@
                             </div>
                             {%else %}
                             <h4 class="invoice-name text-danger">Cette facture n'est pas encore payée</h4>
-                            <p> <a href="#" onclick="return NioApp.loadModal({url:'{{ "paiements/paiement-action/add/#{facture['facture_id']}" | url }}',afterLoad:function(myModal){ UGEST.facturation.addPaiement(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-danger text-white fw-bolder">
+                            <p> <a href="{{ "paiements/paiement-action/add/#{facture['facture_id']}" | url }}" class="btn btn-danger text-white fw-bolder">
                                     <i class="fas fa-plus"></i>&nbsp;Procedé au paiement</a></p>
 
                             {% endif %}

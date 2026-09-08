@@ -29,7 +29,7 @@
                                 <h3 class="page-title">Liste des engins</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" onclick="return NioApp.loadModal({url:'{{ 'engins/engin-action/add/null' | url }}',afterLoad:function(myModal){UGEST.facturation.addEngin(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Ajouter un engin</a>
+                                <a href="{{ 'engins/engin-action/add/null' | url }}" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Ajouter un engin</a>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                             <a href="{{ "engins/detail/#{engin['engin_id']}" | url }}" class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a onclick="return NioApp.loadModal({url:'{{ "engins/engin-action/update/#{engin['engin_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addEngin(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-sm bg-success-light me-2">
+                                            <a href="{{ "engins/engin-action/update/#{engin['engin_id']}" | url }}"  class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                         </div>

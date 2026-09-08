@@ -10,7 +10,7 @@
             <div class="col"></div>
             <div class="col-auto">
                 <div class="invoices-create-btn">
-                    <a onclick="return NioApp.loadModal({url:'{{ "factureLignes/factureLigne-action/add-pointage/#{factureLigne['ligne_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addFactureLigne(myModal)}},{hi:this,type:'modal-lg'})" class="btn save-invoice-btn  btn-warning">
+                    <a href="{{ "factureLignes/factureLigne-action/add-pointage/#{factureLigne['ligne_id']}" | url }}" class="btn save-invoice-btn  btn-warning">
                         Faire le Pointage
                     </a>
 

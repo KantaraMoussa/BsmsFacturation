@@ -49,11 +49,14 @@
                         <table class="table table-stripped table-hover datatable table-bordered">
                                <thead class="thead-light">
                                 <tr>
+                                    <th>#Commande</th>
+                                    <th>#facture</th>
+                                    <th>MTTC</th>
+                                    <th>M.PAY</th>
+                                    <th>Reste</th>
+                                    <th>% Pay</th>
                                     <th>Clients</th>
-                                    <th>Etat de la commande</th>
-                                    <th>Libelle</th>
-                                     <th>No facture</th>
-                                     <th>Etat facture</th>
+                                    <th>Etat facture</th>
                                     <th class="text-end">Action</th>
                                 </tr>
                             </thead>

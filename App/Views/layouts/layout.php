@@ -41,10 +41,10 @@ class layout
                   <td class="text-end">
                                      
                                         <div class="actions ">
-                                           <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('articles/article-action/detail/' . $model['article_id'] . '/' . $model['type_articles'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addArticle(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                           <a href="' . CoreHelpers::url('articles/article-action/detail/' . $model['article_id'] . '/' . $model['type_articles'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('articles/article-action/update/' . $model['article_id'] . '/' . $model['type_articles'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addArticle(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                            <a href="' . CoreHelpers::url('articles/article-action/update/' . $model['article_id'] . '/' . $model['type_articles'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                         </div>
@@ -61,7 +61,7 @@ class layout
         foreach ($models as $model) {
             $ret .= '
                 <tr>
-                  <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+                  <td><a href="' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id'] . '') . '" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
 
                  <td><a href="mailto:' . self::esc($model['email_clients']) . '">' . self::esc($model['email_clients']) . ' </a></td>
                  <td><span>' . self::esc($model['telephone_clients']) . ' </span></td>
@@ -72,10 +72,10 @@ class layout
                  <td><span>' . self::esc($model['pays_addresses']) . ' </span></td>
                                     <td class="text-end">
                                         <div class="actions ">
-                                           <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('addresses/addresse-action/detail/' . $model['adresse_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addAddresse(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                           <a href="' . CoreHelpers::url('addresses/addresse-action/detail/' . $model['adresse_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('addresses/addresse-action/update/' . $model['adresse_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addAddresse(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                            <a href="' . CoreHelpers::url('addresses/addresse-action/update/' . $model['adresse_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                         </div>
@@ -129,16 +129,16 @@ class layout
                      <td><span>' . Helpers::formatMoney($model['mpc']) . '  </span></td>
                        <td><span>' . Helpers::formatMoney($model['reste']) . '  </span></td>
                          <td><span>' . self::esc($model['taux']) . '  </span></td>
-                        <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+                        <td><a href="' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
                  <td><span class="fw-bolder ' . $textColor . '">' . self::esc($model['etat_commandes']) . ' </span></td>
                
                   <td class="text-end">
                      <div class="actions ">
-                        <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                        <a href="' . CoreHelpers::url('commandes/detail/' . $model['commande_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-eye"></i>
                                             </a>
                                                
-                                             <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/commande-action/update/' . $model['commande_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addCommande(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                             <a href="' . CoreHelpers::url('commandes/commande-action/update/' . $model['commande_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                             
@@ -187,14 +187,14 @@ class layout
             $taux =    (floatval($model['taux']));
             $ret .= '
                 <tr>
-                   <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
+                   <td><a href="' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
                       <td><span>' . self::esc($model['reference_factures']) . ' </span></td>
 
                           <td><span>' . Helpers::formatMoney($model['mttc']) . ' </span></td>
                           <td><span>' .  Helpers::formatMoney($model['mpc']) . ' </span></td>
                           <td><span>' .  Helpers::formatMoney($model['reste']) . ' </span></td>
                             <td><span>' . self::esc($taux) . ' % </span></td>
-                      <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+                      <td><a href="' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
 
                   <td><span class="fw-bolder ' . $txtColor . '">' . $txt . ' </span></td>
                  <td class="text-end">
@@ -203,7 +203,7 @@ class layout
                                                 class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                         <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('factures/facture-action/update/' . $model['facture_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                         <a href="' . CoreHelpers::url('factures/facture-action/update/' . $model['facture_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                            <i class="feather-edit"></i>
                                             </a>
                                         </div>
@@ -230,7 +230,7 @@ class layout
             $ret .= '
                 <tr>
 
-                    <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+                    <td><a href="' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
                  <td><span>' . self::esc($model['libelle_articles']) . ' </span></td>
                   <td><span>' . self::esc($model['type_articles']) . ' </span></td>
                    <td><span class="fw-bolder ' . $txtColor . '">' . self::esc($model['statut_factures']) . ' </span></td>
@@ -266,8 +266,8 @@ class layout
         foreach ($models as $model) {
             $ret .= '
                 <tr>
-                  <td>  <a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
-                  <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+                  <td>  <a href="' . CoreHelpers::url('commandes/detail/' . $model['commande_id'] . '') . '" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
+                  <td><a href="' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
                  <td><span>' . self::esc($model['libelle_articles']) . ' </span></td>
 
                  <td><span>' . self::esc($model['date_commandes']) . ' </span></td>
@@ -278,10 +278,10 @@ class layout
                  <td class="text-end">
                                    
                                         <div class="actions ">
-                                           <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('livraisons/livraison-action/detail/' . $model['livraison_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addLivraison(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                           <a href="' . CoreHelpers::url('livraisons/livraison-action/detail/' . $model['livraison_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('livraisons/livraison-action/update/' . $model['livraison_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addLivraison(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                            <a href="' . CoreHelpers::url('livraisons/livraison-action/update/' . $model['livraison_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                         </div>
@@ -317,10 +317,10 @@ class layout
 
                                         <td class="text-end">
                                         <div class="actions ">
-                                           <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('personnelle/transporteur-action/detail/' . $model['personnelle_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addTransporteur(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                           <a href="' . CoreHelpers::url('personnelle/transporteur-action/detail/' . $model['personnelle_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a  onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('personnelle/transporteur-action/update/' . $model['personnelle_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addTransporteur(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                            <a  href="' . CoreHelpers::url('personnelle/transporteur-action/update/' . $model['personnelle_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                         </div>
@@ -339,12 +339,12 @@ class layout
         foreach ($models as $model) {
             $ret .= '
                 <tr>
-                 <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
+                 <td><a href="' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
                       <td><span>' . self::esc($model['reference_factures']) . ' </span></td>
 
 
 
-                                         <td><a a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
+                                         <td><a href="' . CoreHelpers::url('clients/client-action/detail/' . $model['client_id_commandes'] . '') . '" class="fw-bolder text-primary"  >' . self::esc(Helpers::getAcronym($model['noms_clients'])) . ' </a></td>
                  <td><span>' . self::esc($model['date_paiements']) . ' </span></td>
                  <td><span>' . Helpers::formatMoney($model['montant_paiements']) . ' </span></td>
                  <td><span>' . self::esc($model['mode_paiements']) . ' </span></td>
@@ -461,7 +461,7 @@ class layout
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="invoices-settings-btn">
-                         <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/commande-action/add/null') . '\',afterLoad:function(myModal){UGEST.facturation.addCommande(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn">
+                         <a href="' . CoreHelpers::url('commandes/commande-action/add/null') . '"   class="btn">
                                                 <i class="feather feather-plus-circle"></i> New Commande
                                             </a>
 
@@ -560,7 +560,7 @@ class layout
             $taux = (($model['taux']));
             $ret .= '
                 <tr>
-                   <td><a href="#" onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
+                   <td><a href="' . CoreHelpers::url('commandes/detail/' . $model['commande_id_factures'] . '') . '" class="fw-bolder text-primary"  >' . self::esc($model['reference_commandes']) . ' </a></td>
                       <td><span>' . self::esc($model['reference_factures']) . ' </span></td>
 
                           <td><span>' . Helpers::formatMoney($model['mttc']) . ' </span></td>
@@ -576,10 +576,10 @@ class layout
                                                 class="btn btn-sm bg-success-light me-2 ">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                         <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('factures/facture-action/update/' . $model['facture_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addFacture(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                         <a href="' . CoreHelpers::url('factures/facture-action/update/' . $model['facture_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                            <i class="feather-edit"></i>
                                             </a>
-                                            <a onclick="return NioApp.loadModal({url:\'' . CoreHelpers::url('paiements/paiement-action/add/' . $model['facture_id'] . '') . '\',afterLoad:function(myModal){UGEST.facturation.addPaiement(myModal)}},{hi:this,type:\'modal-lg\'})"   class="btn btn-sm bg-success-light me-2">
+                                            <a href="' . CoreHelpers::url('paiements/paiement-action/add/' . $model['facture_id'] . '') . '"   class="btn btn-sm bg-success-light me-2">
                                            <i class="feather-credit-card"></i>
                                             </a>
 

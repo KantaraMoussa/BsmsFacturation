@@ -18,13 +18,15 @@ window.UGEST = {
       UGEST.facturation.editProfile();
       UGEST.facturation.addUser();
       UGEST.facturation.changePassword();
+      UGEST.facturation.adminManageUser();
       UGEST.facturation.addTaxe();
       UGEST.facturation.addEngin();
       UGEST.facturation.addChantier();
       UGEST.facturation.addMaintenance();
       UGEST.facturation.addCarburant();
+      UGEST.facturation.addAvoir();
     },
-    addAddresse: (modal) => {
+    addAddresse: () => {
       if ($j("#action-addresse").count() != 0) {
         Main.formControl("#action-addresse", async (form) => {
           Main.confirm({ text: "" }, async () => {
@@ -39,7 +41,7 @@ window.UGEST = {
             );
             if (res.success) {
               Main.notify("Traitement effectué avec succées");
-              modal.hide();
+              location.href = "addresses";
             } else {
               Main.notify(res.msg, "error");
             }
@@ -48,7 +50,7 @@ window.UGEST = {
         });
       }
     },
-    addArticle: (modal) => {
+    addArticle: () => {
       if ($j("#action-article").count() != 0) {
         Main.formControl("#action-article", async (form) => {
           Main.confirm({ text: "" }, async () => {
@@ -63,7 +65,7 @@ window.UGEST = {
             );
             if (res.success) {
               Main.notify("Traitement effectué avec succées");
-              modal.hide();
+              location.href = "articles";
             } else {
               Main.notify(res.msg, "error");
             }
@@ -72,7 +74,7 @@ window.UGEST = {
         });
       }
     },
-    addClient: (modal) => {
+    addClient: () => {
       if ($j("#action-client").count() != 0) {
         Main.formControl("#action-client", async (form) => {
           Main.confirm({ text: "" }, async () => {
@@ -87,7 +89,7 @@ window.UGEST = {
             );
             if (res.success) {
               Main.notify("Traitement effectué avec succées");
-              modal.hide();
+              location.href = "clients";
             } else {
               Main.notify(res.msg, "error");
             }
@@ -96,7 +98,7 @@ window.UGEST = {
         });
       }
     },
-    addCommande: (modal) => {
+    addCommande: () => {
       if ($j("#action-commande").count() != 0) {
         Main.formControl("#action-commande", async (form) => {
           Main.confirm({ text: "" }, async () => {
@@ -111,7 +113,10 @@ window.UGEST = {
             );
             if (res.success) {
               Main.notify("Traitement effectué avec succées");
-              modal.hide();
+              location.href =
+                form.data.type != "delete" && res.id
+                  ? "commandes/detail/" + res.id
+                  : "commandes";
             } else {
               Main.notify(res.msg, "error");
             }
@@ -120,29 +125,30 @@ window.UGEST = {
         });
       }
     },
-    addFactureLigne: (modal) => {
+    addFactureLigne: () => {
       if ($j("#action-facture-ligne").count() != 0) {
         Main.formControl("#action-facture-ligne", async (form) => {
           Main.confirm({ text: "" }, async () => {
             form.data.action = "add_facture_ligne";
             form.data.type = $j(form.obj).data("type");
             form.data.id = $j(form.obj).data("id");
-            // $j(form.submitBtn).addClass("ks-is-loading");
             let res = JSON.parse(
               await Main.post($j(form.obj).attr("action"), form.data)
             );
             if (res.success) {
               Main.notify("Traitement effectué avec succées");
-              modal.hide();
+              let factureId = $j(form.obj).data("facture");
+              location.href = factureId
+                ? "factures/detail/" + factureId
+                : "factureLignes";
             } else {
               Main.notify(res.msg, "error");
             }
-            // $j(form.submitBtn).removeClass("ks-is-loading");
           });
         });
       }
     },
-    addFacture: (modal) => {
+    addFacture: () => {
       if ($j("#action-facture").count() != 0) {
         Main.formControl("#action-facture", async (form) => {
           Main.confirm({ text: "" }, async () => {
@@ -157,7 +163,10 @@ window.UGEST = {
             );
             if (res.success) {
               Main.notify("Traitement effectué avec succées");
-              modal.hide();
+              location.href =
+                form.data.type != "delete" && res.id
+                  ? "factures/detail/" + res.id
+                  : "factures";
             } else {
               Main.notify(res.msg, "error");
             }
@@ -166,7 +175,7 @@ window.UGEST = {
         });
       }
     },
-    addLivraison: (modal) => {
+    addLivraison: () => {
       if ($j("#action-livraison").count() != 0) {
         Main.formControl("#action-livraison", async (form) => {
           Main.confirm({ text: "" }, async () => {
@@ -181,7 +190,7 @@ window.UGEST = {
             );
             if (res.success) {
               Main.notify("Traitement effectué avec succées");
-              modal.hide();
+              location.href = "livraisons";
             } else {
               Main.notify(res.msg, "error");
             }
@@ -190,32 +199,27 @@ window.UGEST = {
         });
       }
     },
-    addPaiement: (modal) => {
+    addPaiement: () => {
       if ($j("#action-paiements").count() != 0) {
         Main.formControl("#action-paiements", async (form) => {
           Main.confirm({ text: "" }, async () => {
             form.data.action = "add_paiement";
             form.data.type = $j(form.obj).data("type");
-            // form.data.type != "add"
-            //? (form.data.id = $j(form.obj).data("id"))
-            //  : (form.data.id = null);
             form.data.id = $j(form.obj).data("id");
-            //  $j(form.submitBtn).addClass("ks-is-loading");
             let res = JSON.parse(
               await Main.post($j(form.obj).attr("action"), form.data)
             );
             if (res.success) {
               Main.notify("Traitement effectué avec succées");
-              modal.hide();
+              location.reload();
             } else {
               Main.notify(res.msg, "error");
             }
-            //  $j(form.submitBtn).removeClass("ks-is-loading");
           });
         });
       }
     },
-    addEngin: (modal) => {
+    addEngin: () => {
       if ($j("#action-engin").count() != 0) {
         Main.formControl("#action-engin", async (form) => {
           form.data.action = "add_engin";
@@ -228,8 +232,7 @@ window.UGEST = {
           );
           if (res.success) {
             Main.notify("Traitement effectué avec succées");
-            if (modal) modal.hide();
-            else location.reload();
+            location.href = "engins";
           } else {
             Main.notify(res.msg, "error");
           }
@@ -256,7 +259,7 @@ window.UGEST = {
         });
       }
     },
-    addMaintenance: (modal) => {
+    addMaintenance: () => {
       if ($j("#action-maintenance").count() != 0) {
         Main.formControl("#action-maintenance", async (form) => {
           form.data.action = "add_maintenance";
@@ -267,7 +270,7 @@ window.UGEST = {
           );
           if (res.success) {
             Main.notify("Maintenance enregistrée");
-            if (modal) modal.hide();
+            location.reload();
           } else {
             Main.notify(res.msg, "error");
           }
@@ -275,7 +278,7 @@ window.UGEST = {
         });
       }
     },
-    addCarburant: (modal) => {
+    addCarburant: () => {
       if ($j("#action-carburant").count() != 0) {
         Main.formControl("#action-carburant", async (form) => {
           form.data.action = "add_carburant";
@@ -286,7 +289,7 @@ window.UGEST = {
           );
           if (res.success) {
             Main.notify("Plein enregistré");
-            if (modal) modal.hide();
+            location.reload();
           } else {
             Main.notify(res.msg, "error");
           }
@@ -294,7 +297,7 @@ window.UGEST = {
         });
       }
     },
-    addChantier: (modal) => {
+    addChantier: () => {
       if ($j("#action-chantier").count() != 0) {
         Main.formControl("#action-chantier", async (form) => {
           form.data.action = "add_chantier";
@@ -307,8 +310,7 @@ window.UGEST = {
           );
           if (res.success) {
             Main.notify("Traitement effectué avec succées");
-            if (modal) modal.hide();
-            else location.reload();
+            location.href = "chantiers";
           } else {
             Main.notify(res.msg, "error");
           }
@@ -351,7 +353,7 @@ window.UGEST = {
         });
       });
     },
-    addAvoir: (modal) => {
+    addAvoir: () => {
       if ($j("#action-avoir").count() != 0) {
         Main.formControl("#action-avoir", async (form) => {
           Main.confirm({ text: "" }, async () => {
@@ -362,7 +364,7 @@ window.UGEST = {
             );
             if (res.success) {
               Main.notify("Avoir émis avec succées");
-              modal.hide();
+              location.href = "factures/detail/" + form.data.id;
             } else {
               Main.notify(res.msg, "error");
             }
@@ -370,7 +372,7 @@ window.UGEST = {
         });
       }
     },
-    addTransporteur: (modal) => {
+    addTransporteur: () => {
       if ($j("#action-transporteur").count() != 0) {
         Main.formControl("#action-transporteur", async (form) => {
           Main.confirm({ text: "" }, async () => {
@@ -385,7 +387,7 @@ window.UGEST = {
             );
             if (res.success) {
               Main.notify("Traitement effectué avec succées");
-              modal.hide();
+              location.href = "personnelle";
             } else {
               Main.notify(res.msg, "error");
             }
@@ -465,6 +467,40 @@ window.UGEST = {
             Main.notify(res.msg, "error");
           }
           $j(form.submitBtn).removeClass("ks-is-loading");
+        });
+      }
+    },
+    adminManageUser: () => {
+      if ($j("#action-admin-user").count() != 0) {
+        Main.formControl("#action-admin-user", async (form) => {
+          form.data.action = "admin_update_user";
+          form.data.id = $j(form.obj).data("id");
+          let res = JSON.parse(
+            await Main.post($j(form.obj).attr("action"), form.data)
+          );
+          if (res.success) {
+            Main.notify("Utilisateur mis à jour avec succées");
+            location.href = "user/list";
+          } else {
+            Main.notify(res.msg, "error");
+          }
+          $j(form.submitBtn).removeClass("ks-is-loading");
+        });
+      }
+      if ($j("#toggle-user-status").count() != 0) {
+        $j("#toggle-user-status").click(async function () {
+          let res = JSON.parse(
+            await Main.post($j("#action-admin-user").attr("action"), {
+              action: "admin_toggle_status",
+              id: $j(this).data("id"),
+            })
+          );
+          if (res.success) {
+            Main.notify("Statut mis à jour");
+            location.reload();
+          } else {
+            Main.notify(res.msg, "error");
+          }
         });
       }
     },

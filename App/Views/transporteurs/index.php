@@ -31,7 +31,7 @@
                                 <h3 class="page-title">Listes des personnelle</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" onclick="return NioApp.loadModal({url:'{{ 'personnelle/transporteur-action/add/null' | url }}',afterLoad:function(myModal){UGEST.facturation.addTransporteur(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-primary"><i
+                                <a href="{{ 'personnelle/transporteur-action/add/null' | url }}" class="btn btn-primary"><i
                                         class="fas fa-plus"></i></a>
                             </div>
                         </div>

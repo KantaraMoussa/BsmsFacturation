@@ -29,7 +29,7 @@
                                 <h3 class="page-title">Liste des chantiers</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" onclick="return NioApp.loadModal({url:'{{ 'chantiers/chantier-action/add/null' | url }}',afterLoad:function(myModal){UGEST.facturation.addChantier(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Ajouter un chantier</a>
+                                <a href="{{ 'chantiers/chantier-action/add/null' | url }}" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;Ajouter un chantier</a>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                             <a href="{{ "chantiers/detail/#{chantier['chantier_id']}" | url }}" class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-eye"></i>
                                             </a>
-                                            <a onclick="return NioApp.loadModal({url:'{{ "chantiers/chantier-action/update/#{chantier['chantier_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addChantier(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-sm bg-success-light me-2">
+                                            <a href="{{ "chantiers/chantier-action/update/#{chantier['chantier_id']}" | url }}"  class="btn btn-sm bg-success-light me-2">
                                                 <i class="feather-edit"></i>
                                             </a>
                                         </div>

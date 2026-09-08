@@ -31,6 +31,10 @@ class Connection
             return false;
         }
 
+        if (!empty($user['status_users']) && trim($user['status_users']) === 'inactif') {
+            return false;
+        }
+
         if (utilHelpers::isLegacyHash($user['pwd_users'])) {
             $this->usersReq->update(
                 array('pwd_users' => password_hash($this->password, PASSWORD_DEFAULT)),
@@ -58,11 +62,17 @@ class Connection
     {
         if (!empty($_SESSION['id_user'])) {
             Audit::log('logout', 'user', $_SESSION['id_user']);
+            $this->usersReq->update(
+                array('date_last_logout_users' => time()),
+                'id_users',
+                $_SESSION['id_user']
+            );
         }
         $_SESSION[] = array();
         session_destroy();
         unset($_SESSION);
-        header('Location:' . Helpers::url(''));
+        $suffix = !empty($_GET['timeout']) ? '?timeout=1' : '';
+        header('Location:' . Helpers::url('') . $suffix);
     }
 
     private function createSession()
@@ -77,6 +87,12 @@ class Connection
         $_SESSION['pwd'] = $user['pwd_users'];
 
         $_SESSION['role_utilisateur'] = $user['type_users'];
+
+        $this->usersReq->update(
+            array('date_last_login_users' => time()),
+            'id_users',
+            $user['id_users']
+        );
     }
     public function test()
     {

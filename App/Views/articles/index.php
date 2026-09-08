@@ -30,10 +30,10 @@
                                 <h3 class="page-title">Listes des articles</h3>
                             </div>
                             <div class="col-auto text-end float-end ms-auto download-grp">
-                                <a href="#" onclick="return NioApp.loadModal({url:'{{ 'articles/article-action/add/null/produit' | url }}',afterLoad:function(myModal){UGEST.facturation.addArticle(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-dark"><i
+                                <a href="{{ 'articles/article-action/add/null/produit' | url }}" class="btn btn-dark"><i
                                         class="fas fa-plus"></i>&nbsp;Produit</a>
 
-                                <a href="#" onclick="return NioApp.loadModal({url:'{{ 'articles/article-action/add/null/service' | url }}',afterLoad:function(myModal){UGEST.facturation.addArticle(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-warning text-white"><i
+                                <a href="{{ 'articles/article-action/add/null/service' | url }}" class="btn btn-warning text-white"><i
                                         class="fas fa-plus"></i>&nbsp;Services</a>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
 
                     <div class="table-responsive">
                         <table
-                            class="table  table-striped table-bordered" id="dataTable">
+                            class="table border-0 star-student table-hover table-center mb-0 datatable table-striped" id="dataTable">
                             <thead class="student-thread">
                                 <tr>
                                     <th>Libelle</th>

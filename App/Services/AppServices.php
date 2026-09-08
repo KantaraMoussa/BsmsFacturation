@@ -1014,6 +1014,9 @@ class AppServices
                 }
                 return $created;
             });
+            if ($sql) {
+                $ret['id'] = $id;
+            }
         } else if ($data['type'] == "update") {
             //  vérifié si le client dispose déjàs une adresse
             $facture = $this->factureModel->get_1_1('facture_id', $data['id'], 0, 1);
@@ -1030,6 +1033,7 @@ class AppServices
             ), 'facture_id', $data['id']);
             if ($sql == true) {
                 Audit::log('update_facture', 'facture', $data['id'], $facture, $data);
+                $ret['id'] = $data['id'];
             }
         } else if ($data['type'] == "delete") {
             $facture = $this->factureModel->get_1_1('facture_id', $data['id'], 0, 1);
@@ -1204,12 +1208,13 @@ class AppServices
                 $ret['msg'] = "La date de fin du contrat ne peut pas être antérieure à la date de début ";
                 return $ret;
             }
-            $sql = $this->withSequenceLock('commande_seq_' . $data['client'], function () use ($data, $client) {
+            $newCommandeId = CoreHelpers::generateString(32);
+            $sql = $this->withSequenceLock('commande_seq_' . $data['client'], function () use ($data, $client, $newCommandeId) {
                 $getNumberLastCommande = count($this->commandeModel->get_1_1_NO_LIMIT('client_id_commandes', $data['client']));
                 $order = str_pad($getNumberLastCommande + 1, 2, '0', STR_PAD_LEFT);
                 $refCommande = ($order . '/' . utileHelpers::getAcronym($client['noms_clients']) . '/BSMS/' . date('Y') . '/CMD');
                 return $this->commandeModel->add(array(
-                    'commande_id' => CoreHelpers::generateString(32),
+                    'commande_id' => $newCommandeId,
                     'client_id_commandes' => $data['client'],
                     'date_commandes' => $data['date'],
                     'created_at_commandes' => time(),
@@ -1226,6 +1231,9 @@ class AppServices
                     'caution_commandes' => $data['caution'] ?? 0,
                 ));
             });
+            if ($sql) {
+                $ret['id'] = $newCommandeId;
+            }
         } else if ($data['type'] == "update") {
 
             $commande = $this->commandeModel->get_1_1('commande_id', $data['id'], 0, 1);
@@ -1253,6 +1261,9 @@ class AppServices
                 'conditions_paiement_commandes' => $data['conditions_paiement'] ?? $commande['conditions_paiement_commandes'],
                 'caution_commandes' => $data['caution'] ?? $commande['caution_commandes'],
             ), 'commande_id', $data['id']);
+            if ($sql) {
+                $ret['id'] = $data['id'];
+            }
         }
         $ret['success'] = $sql == true;
         return $ret;

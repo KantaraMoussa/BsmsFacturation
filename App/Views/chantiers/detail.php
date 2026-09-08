@@ -11,11 +11,11 @@
                 <h3 class="page-title">Chantier {{chantier['nom_chantiers']}}</h3>
             </div>
             <div class="col-auto">
-                <a onclick="return NioApp.loadModal({url:'{{ "chantiers/chantier-action/update/#{chantier['chantier_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addChantier(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-warning">
+                <a href="{{ "chantiers/chantier-action/update/#{chantier['chantier_id']}" | url }}"  class="btn btn-warning">
                     <i class="feather-edit"></i>&nbsp;Modifier
                 </a>
                 {% if role_utilisateur == 'admin' %}
-                <a onclick="return NioApp.loadModal({url:'{{ "chantiers/chantier-action/delete/#{chantier['chantier_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addChantier(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-danger">
+                <a href="{{ "chantiers/chantier-action/delete/#{chantier['chantier_id']}" | url }}"  class="btn btn-danger">
                     <i class="feather-trash-2"></i>&nbsp;Supprimer
                 </a>
                 {% endif %}

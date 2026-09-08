@@ -1,6 +1,6 @@
 {% extends "base.php" %}
 
-{% block title %} Gestion des Commandes {% endblock %}
+{% block title %} Détail facture {% endblock %}
 
 {% block body %}
 <div class="content container-fluid">
@@ -12,14 +12,14 @@
                 <a class="btn btn-success" href="{{"factures/detail/preview/#{facture['facture_id']}" | url}}"><i class="fe fe-eye"></i> Prévisualiser </a>
                 {%endif%}
 
-                {%if role_utilisateur=='admin' and facture['statut_factures']!= 'payée' and facture['valide_factures'] != 'true' %}
-                <a onclick="return NioApp.loadModal({url:'{{ "factureLignes/factureLigne-action/validate/#{facture['facture_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addFactureLigne(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-danger">
+                {%if _SESSION['role_utilisateur']=='admin' and facture['statut_factures']!= 'payée' and facture['valide_factures'] != 'true' %}
+                <a href="{{ "factureLignes/factureLigne-action/validate/#{facture['facture_id']}" | url }}"  class="btn btn-danger">
                     Valider la facture
                 </a>
                 {%endif%}
 
-                {%if role_utilisateur=='admin' and facture['valide_factures'] == 'true' %}
-                <a onclick="return NioApp.loadModal({url:'{{ "avoirs/avoir-action/#{facture['facture_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addAvoir(myModal)}},{hi:this,type:'modal-lg'})" class="btn btn-outline-danger">
+                {%if _SESSION['role_utilisateur']=='admin' and facture['valide_factures'] == 'true' %}
+                <a href="{{ "avoirs/avoir-action/#{facture['facture_id']}" | url }}"  class="btn btn-outline-danger">
                     Émettre un avoir
                 </a>
                 {%endif%}
@@ -27,7 +27,7 @@
             <div class="col-auto">
                 <div class="invoices-create-btn">
                     {% if facture['statut_factures']!= 'payée' and facture['valide_factures']== 'false' %}
-                    <a onclick="return NioApp.loadModal({url:'{{ "factureLignes/factureLigne-action/add/#{facture['facture_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addFactureLigne(myModal)}},{hi:this,type:'modal-lg'})" class="btn save-invoice-btn  btn-warning">
+                    <a href="{{ "factureLignes/factureLigne-action/add/#{facture['facture_id']}" | url }}"  class="btn save-invoice-btn  btn-warning">
                         Ajouté articles
                     </a>
                     {%endif%}
@@ -173,9 +173,9 @@
                                             <td>
                                                 <a href="{{"factureLignes/detail/pointage/#{produit['ligne_id']}" | url}}" class="btn save-invoice-btn  btn-primary"> <i class="fas fa-eye"></i></a>&nbsp;
                                                 {% if facture['statut_factures'] != 'payée' and facture['valide_factures'] != 'true' %}
-                                                <a title="Faire une mise à jour" onclick="return NioApp.loadModal({url:'{{ "factureLignes/factureLigne-action/update/#{produit['ligne_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addFactureLigne(myModal)}},{hi:this,type:'modal-lg'})" class="btn save-invoice-btn  btn-warning">
+                                                <a href="{{ "factureLignes/factureLigne-action/update/#{produit['ligne_id']}" | url }}" title="Faire une mise à jour"  class="btn save-invoice-btn  btn-warning">
                                                     <i class="fas fa-edit"></i></a>
-                                                <a title="Supprimer l'article  sur la facture" onclick="return NioApp.loadModal({url:'{{ "factureLignes/factureLigne-action/delete/#{produit['ligne_id']}" | url }}',afterLoad:function(myModal){UGEST.facturation.addFactureLigne(myModal)}},{hi:this,type:'modal-lg'})" class="btn save-invoice-btn  btn-danger">
+                                                <a href="{{ "factureLignes/factureLigne-action/delete/#{produit['ligne_id']}" | url }}" title="Supprimer l'article  sur la facture"  class="btn save-invoice-btn  btn-danger">
                                                     <i class="fa fa-trash"></i></a>
                                                 {% else %}
                                                 <i class="fa fa-cog"></i>&nbsp;Aucune
